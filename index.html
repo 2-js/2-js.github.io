@@ -6,7 +6,7 @@
 <body>
 
 <script>
-  alert('updated')
+  alert('v 0.2')
   document.title = "Google Docs: Free Online Documents for Personal Use"
   function help() {
     var srcT = document.getElementById('iframe').src
@@ -20,10 +20,10 @@
   }
   function fulls() {
     document.getElementById('iframe').height = "700px"
+    var i = 0
     i++
-    var i = 1
-    if (i % 2 == 0) { document.getElementById('fullscreen').value = "-" }
-    if (i % 2 == 1) { document.getElementById('fullscreen').value = "+" }
+    if (i % 2 == 0) { document.getElementById('iframe').height = "700px" }
+    if (i % 2 == 1) { document.getElementById('iframe').height = "555px" }
   }
 </script>
 <input type="button" id="fullscreen" class="buttonF" onclick="fulls()" value="+"></input>
