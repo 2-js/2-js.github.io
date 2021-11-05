@@ -19,6 +19,10 @@
   }
   function fulls() {
     document.getElementById('iframe').height = "700px"
+    i++
+    var i = 1
+    if (i % 2 == 0) { document.getElementById('fullscreen').value = "-" }
+    if (i % 2 == 1) { document.getElementById('fullscreen').value = "+" }
   }
 </script>
 <input type="button" id="fullscreen" class="buttonF" onclick="fulls()" value="+"></input>
@@ -26,7 +30,7 @@
 <input type="button" id="germs" class="button" onclick="germ()" value="Germs"></input>
 <br>
 <center>
-<iframe id="iframe" style="border: 2px solid #4c4c4c; margin-right: 10px" width="100%" height="555px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+<iframe id="iframe" style="border: 2px solid #4c4c4c;" width="100%" height="555px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
 </center>
     </body>
 <style>
