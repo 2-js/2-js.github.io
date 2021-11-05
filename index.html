@@ -18,6 +18,9 @@
   function germ() {
   document.getElementById('iframe').src = "https://germs.io"
   }
+  function kirka() {
+  document.getElementById('iframe').src = "https://kirka.io"
+  }
   function fulls() {
     document.getElementById('iframe').height = "700px"
   }
@@ -25,6 +28,8 @@
 <input type="button" id="fullscreen" class="buttonF" onclick="fulls()" value="+"></input>
 <input type="button" id="driftboss" class ="button" onclick="boss()" value="Drift Boss"></input>
 <input type="button" id="germs" class="button" onclick="germ()" value="Germs"></input>
+<input type="button" id="kirka" class="button" onclick="kirka()" value="Kirka"></input>
+
 <br>
 <center>
 <iframe id="iframe" style="border: 2px solid #4c4c4c;" width="100%" height="555px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
