@@ -1,5 +1,5 @@
 <style>
-    .buttonF {
+    .button {
   box-shadow: 5px 10px 18px gray;
   background-color: #4c4c4c;
   color: white;
@@ -12,7 +12,7 @@
   transition-duration: 0.4s;
   float: left 5px;
 }
-.buttonF:hover {
+.button:hover {
   background-color: #FFFFFF;
   color: black;
   border: 2px solid #4c4c4c;
