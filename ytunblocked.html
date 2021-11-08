@@ -2,11 +2,11 @@
 </head>
 <body>
 <center>
-<input type="input" id="input-box" class ="buttonyt" placeholder="Input Youtube Link"></input>
-<input type="button" id="ytunb" class="buttonsub" onclick="generate()" value="Submit"></input>
-<input type="button" id="gback" class="buttonsub" onclick="window.location.href='/index'" value="Go Back"></input>
-<br>
+<input placeholder="Put Youtube Link Here" type="text" id="input-box">
+<button class="button" onclick="generate()">Submit</button>
+<input type="button" id="gback" class="buttonsub" onclick="window.location.href='/index'" value="Go Back"></input> <br>
 <iframe id="video-frame" style="display:none;" width="1280" height="720" id="video-frame" src="https://www.youtube.com/embed/BX7j1QX836c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
 </center>
 <script>
     function generate() {
@@ -21,6 +21,7 @@
     .buttonyt {
   box-shadow: 5px 10px 18px gray;
   color: white;
+  text-color: black;
   padding: 14px 20px;
   margin: 8px 0;
   border: 2px solid #4c4c4c;
