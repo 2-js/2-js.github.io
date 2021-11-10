@@ -4,7 +4,7 @@
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
-  window.open("https://www.google.com/search?q=test1")
+  window.location.href = "https://www.google.com/search?q=test1"
   }
   function germ() {
   document.getElementById('iframe').src = "https://germs.io"
