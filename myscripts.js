@@ -21,10 +21,8 @@
   document.getElementById('iframe').src = "https://driftboss.io/drift-hunters.embed"
   }
   function slope() {
-  document.getElementById('test2').innerHTML = "Slope"
   document.getElementById('iframe').src = "https://slopeunblocked.online/slope-unblocked.embed"
   }
   function fullsX() {
-  document.getElementById('test2').innerHTML = "Full Screened"
   document.getElementById('iframe').height = "535px"
   }
