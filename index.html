@@ -31,19 +31,12 @@
   function slope() {
   document.getElementById('iframe').src = "https://slopeunblocked.online/slope-unblocked.embed"
   }
-  function update() {
-var select = document.getElementById('theme');
-var value = select.options[select.selectedIndex].value;
- if (value == green) { document.getElementsByClassName('button').color = green }
-} 
+  function fullsX() {
+  document.getElementById('iframe').height = "535px"
+  }
 </script>
 <input type="button" id="fulls" class ="buttonF" onclick="fulls()" value="+"></input>
-  <select name="themes" class="classic" onChange="update()" id="theme">
-  <option value="black">Black</option>
-  <option value="green">Green</option>
-  <option value="red">Red</option>
-  <option value="yr">Y & R</option>
-</select>
+<input type="button" id="fulls" class ="buttonF" onclick="fullsX()" value="+"></input>
 <input type="button" id="driftboss" class ="button" onclick="boss()" value="Drift Boss"></input>
 <input type="button" id="germs" class="button" onclick="germ()" value="Germs"></input>
 <input type="button" id="drifth" class="button" onclick="drifth()" value="Drift Hunt"></input>
