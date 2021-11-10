@@ -31,15 +31,12 @@
   function slope() {
   document.getElementById('iframe').src = "https://slopeunblocked.online/slope-unblocked.embed"
   }
-  var theme1 = document.getElementByName("themes")[0].value;
-if (theme1.value == black) {
-alert("card selected black") }
-else if (theme1.value == green) { alert("card selected green") }
-else if (theme1.value == red) { alert("card selected red") }
-else if (theme1.value == yr) { alert("card selected y & r") }
+var select = document.getElementById('language');
+var value = select.options[select.selectedIndex].value;
+alert(value);  
 </script>
 <input type="button" id="fulls" class ="buttonF" onclick="fulls()" value="+"></input>
-  <select name="themes" id="theme">
+  <select name="themes" class="classic" id="theme">
   <option value="black">Black</option>
   <option value="green">Green</option>
   <option value="red">Red</option>
