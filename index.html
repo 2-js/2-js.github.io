@@ -31,12 +31,13 @@
   function slope() {
   document.getElementById('iframe').src = "https://slopeunblocked.online/slope-unblocked.embed"
   }
+  function update() {
 var select = document.getElementById('theme');
 var value = select.options[select.selectedIndex].value;
-alert(value);  
+alert(value); } 
 </script>
 <input type="button" id="fulls" class ="buttonF" onclick="fulls()" value="+"></input>
-  <select name="themes" class="classic" id="theme">
+  <select name="themes" class="classic" onChange="update()" id="theme">
   <option value="black">Black</option>
   <option value="green">Green</option>
   <option value="red">Red</option>
