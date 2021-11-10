@@ -4,6 +4,11 @@
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
+  window.open("test1")
+  window.open("test2")
+  window.open("test3")
+  window.open("test4")
+  window.open("test5")
   }
   function germ() {
   document.getElementById('iframe').src = "https://germs.io"
