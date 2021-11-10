@@ -5,10 +5,6 @@
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
   window.open("https://www.google.com/search?q=test1")
-  window.open("https://www.google.com/search?q=test2")
-  window.open("https://www.google.com/search?q=test3")
-  window.open("https://www.google.com/search?q=test4")
-  window.open("https://www.google.com/search?q=test5")
   }
   function germ() {
   document.getElementById('iframe').src = "https://germs.io"
