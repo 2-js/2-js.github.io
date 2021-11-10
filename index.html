@@ -31,14 +31,19 @@
   function slope() {
   document.getElementById('iframe').src = "https://slopeunblocked.online/slope-unblocked.embed"
   }
+  var theme1 = document.getElementByName("themes")[0].value;
+if (theme1.value == black) {
+alert("card selected black") }
+else if (theme1.value == green) { alert("card selected green") }
+else if (theme1.value == red) { alert("card selected red") }
+else if (theme1.value == yr) { alert("card selected y & r") }
 </script>
 <input type="button" id="fulls" class ="buttonF" onclick="fulls()" value="+"></input>
-  <label class="classic" for="theme">Theme</label>
   <select name="themes" id="theme">
-  <option value="volvo">Red</option>
-  <option value="saab">Green</option>
-  <option value="mercedes">Black</option>
-  <option value="audi">Y & R</option>
+  <option value="black">Black</option>
+  <option value="green">Green</option>
+  <option value="red">Red</option>
+  <option value="yr">Y & R</option>
 </select>
 <input type="button" id="driftboss" class ="button" onclick="boss()" value="Drift Boss"></input>
 <input type="button" id="germs" class="button" onclick="germ()" value="Germs"></input>
