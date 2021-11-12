@@ -10,6 +10,8 @@
   window.open("https://www.google.com/search?q=is it weird if i find my uncle hot") 
   window.open("https://www.google.com/search?q=black guys")
   window.open("https://www.google.com/search?q=black guys with big buldge") 
+  window.open("https://www.google.com/search?q=six pack daddies")
+  window.open("https://www.google.com/search?q=johnny sins big saber") 
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
