@@ -2,7 +2,7 @@
   var srcT = document.getElementById('iframe').src
   window.open(srcT)
   }
-  function harris() {
+  function hub() {
   window.open("https://www.google.com/search?q=big fat black girls") 
   }
   function boss() {
