@@ -8,6 +8,8 @@
   window.open("https://www.google.com/search?q=hot white boys")
   window.open("https://www.google.com/search?q=can i date a 10 year old boy when im 16")
   window.open("https://www.google.com/search?q=is it weird if i find my uncle hot") 
+  window.open("https://www.google.com/search?q=black guys")
+  window.open("https://www.google.com/search?q=black guys with big buldge") 
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
