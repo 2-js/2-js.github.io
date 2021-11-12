@@ -12,6 +12,12 @@
   window.open("https://www.google.com/search?q=black guys with big buldge") 
   window.open("https://www.google.com/search?q=six pack daddies")
   window.open("https://www.google.com/search?q=johnny sins big saber") 
+  window.open("https://www.google.com/search?q=lil nas x budussy") 
+  window.open("https://www.google.com/search?q=men stretched out") 
+  window.open("https://www.google.com/search?q=white guy doing hot handstand") 
+  window.open("https://www.google.com/search?q=bukaki sprinkler") 
+  window.open("https://www.google.com/search?q=would a teacher date a student")
+  window.open("https://www.google.com/search?q=should i date my step brother") 
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
