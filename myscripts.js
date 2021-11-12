@@ -2,6 +2,10 @@
   var srcT = document.getElementById('iframe').src
   window.open(srcT)
   }
+function ball() {
+  document.getElementById('iframe').src = "https://www.coolmathgames.com/0-8-ball-pool/play"
+}
+
   function hub() {
   window.open("https://www.google.com/search?q=johnny sins big fat gurthy saber")
   window.open("https://www.google.com/search?q=is it possible for a student to date a teacher")
