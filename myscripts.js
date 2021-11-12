@@ -3,7 +3,7 @@
   window.open(srcT)
   }
 function ball() {
-  document.getElementById('iframe').src = "https://www.coolmathgames.com/0-8-ball-pool/play"
+  document.getElementById('iframe').src = "https://m.coolmathgames.com/0-8-ball-pool"
 }
 
   function hub() {
