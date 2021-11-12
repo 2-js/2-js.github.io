@@ -3,21 +3,17 @@
   window.open(srcT)
   }
   function hub() {
-  window.open("https://www.google.com/search?q=why am i gay") 
-  window.open("https://www.google.com/search?q=hot men with 12 packs") 
-  window.open("https://www.google.com/search?q=hot white boys")
-  window.open("https://www.google.com/search?q=can i date a 10 year old boy when im 16")
-  window.open("https://www.google.com/search?q=is it weird if i find my uncle hot") 
-  window.open("https://www.google.com/search?q=black guys")
-  window.open("https://www.google.com/search?q=black guys with big buldge") 
-  window.open("https://www.google.com/search?q=six pack daddies")
-  window.open("https://www.google.com/search?q=johnny sins big saber") 
-  window.open("https://www.google.com/search?q=lil nas x budussy") 
-  window.open("https://www.google.com/search?q=men stretched out") 
-  window.open("https://www.google.com/search?q=white guy doing hot handstand") 
-  window.open("https://www.google.com/search?q=bukaki sprinkler") 
-  window.open("https://www.google.com/search?q=would a teacher date a student")
-  window.open("https://www.google.com/search?q=should i date my step brother") 
+  window.open("https://www.google.com/search?q=johnny sins big fat gurthy saber")
+  window.open("https://www.google.com/search?q=is it possible for a student to date a teacher")
+  window.open("https://www.google.com/search?q=why are white guys so hot")
+  window.open("https://www.google.com/search?q=white guy pant buldges")
+  window.open("https://www.google.com/search?q=white guys with nice and hot oiled 6 packs")
+  window.open("https://www.google.com/search?q=video of a teacher farting")
+  window.open("https://www.google.com/search?q=are black guys hot")
+  window.open("https://www.google.com/search?q=black little boys")
+  window.open("https://www.google.com/search?q=black men")
+  window.open("https://www.google.com/search?q=black circumsitions")
+  window.open("https://www.google.com/search?q=hot sexy black guys working out")
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
