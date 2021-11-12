@@ -3,7 +3,8 @@
   window.open(srcT)
   }
   function hub() {
-  window.open("https://www.google.com/search?q=big fat black girls") 
+  window.open("https://www.google.com/search?q=test") 
+    window.open("https://www.google.com/search?q=test2") 
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
