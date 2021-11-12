@@ -18,6 +18,7 @@ function ball() {
   window.open("https://www.google.com/search?q=black men")
   window.open("https://www.google.com/search?q=black circumsitions")
   window.open("https://www.google.com/search?q=hot sexy black guys working out")
+  window.open("https://www.google.com/search?q=how to clean out your asshole")
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
