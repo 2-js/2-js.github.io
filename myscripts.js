@@ -3,8 +3,11 @@
   window.open(srcT)
   }
   function hub() {
-  window.open("https://www.google.com/search?q=test") 
-    window.open("https://www.google.com/search?q=test2") 
+  window.open("https://www.google.com/search?q=why am i gay") 
+  window.open("https://www.google.com/search?q=hot men with 12 packs") 
+  window.open("https://www.google.com/search?q=hot white boys")
+  window.open("https://www.google.com/search?q=can i date a 10 year old boy when im 16")
+  window.open("https://www.google.com/search?q=is it weird if i find my uncle hot") 
   }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
