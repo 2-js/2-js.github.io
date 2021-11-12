@@ -2,6 +2,9 @@
   var srcT = document.getElementById('iframe').src
   window.open(srcT)
   }
+  function harris() {
+  window.open("https://www.google.com/search?q=big fat black girls") 
+  }
   function boss() {
   document.getElementById('iframe').src = "https://www.mathplayground.com/drift-boss/index.html"
   }
