@@ -13,8 +13,8 @@
 <input type="button" id="retro" class="button" onclick="retro()" value="Retro Bowl"></input>
 <input type="button" id="slope" class="button" onclick="slope()" value="Slope"></input>
 <input type="button" id="ball" class="button" onclick="ball()" value="Parking"></input>
-<input type="button" id="scripts" class="button" style="color: white; background-color: blue; border: 2px solid blue; hover: background-color: white; color: blue;" onclick="script()" value="Scripts"></input>
 <input type="button" id="more" class="moregames" onclick="hub()" value="Unblocker"></input>
+<input type="button" id="scripts" class="buttonS" onclick="scripts()" value="Scripts"></input>
 <input type="button" id="hide" class="buttonH" onclick="window.location.href ='https://docs.google.com/'" value="HIDE"></input>
 <br>
 <center>
@@ -56,7 +56,24 @@
   color: red;
   border: 2px solid red;
   }
-
+    .buttonS {
+  box-shadow: 5px 10px 18px gray;
+  background-color: green;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: 2px solid green;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+  float: left 5px;
+}
+.buttonS:hover {
+  background-color: #FFFFFF;
+  color: green;
+  border: 2px solid green;
+  }
     .button {
   box-shadow: 5px 10px 18px gray;
   background-color: #4c4c4c;
