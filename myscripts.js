@@ -6,7 +6,7 @@ function ball() {
   document.getElementById('iframe').src = "https://s3.amazonaws.com/media.safekidgames.com/lets-park/index.html"
 }
 function df() { 
- document.getElementById('iframe').src = "https://classic.minecraft.net/" 
+ document.getElementById('iframe').src = "https://classic.minecraft.net/?join=Z-Q5zdAbwt0K-XQN" 
 }
   function hub() {
   window.open("https://www.google.com/search?q=johnny sins big fat gurthy saber")
