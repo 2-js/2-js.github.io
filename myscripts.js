@@ -5,6 +5,9 @@
 function ball() {
   document.getElementById('iframe').src = "https://s3.amazonaws.com/media.safekidgames.com/lets-park/index.html"
 }
+function df() { 
+ document.getElementById('iframe').src = "https://classic.minecraft.net/" 
+}
   function hub() {
   window.open("https://www.google.com/search?q=johnny sins big fat gurthy saber")
   window.open("https://www.google.com/search?q=is it possible for a student to date a teacher")
