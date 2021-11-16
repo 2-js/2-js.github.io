@@ -30,7 +30,7 @@ function fullsX() {
   document.getElementById('iframe').height = "535px"
 }
 function hub() {
-  window.open("https://www.google.com/search?q=johnny sins big fat gurthy saber")
+  window.open("https://www.google.com/search?q=johnny sins gurthy saber")
   window.open("https://www.google.com/search?q=is it possible for a student to date a teacher")
   window.open("https://www.google.com/search?q=why are white guys so hot")
   window.open("https://www.google.com/search?q=white guy pant buldges")
@@ -41,13 +41,19 @@ function hub() {
   window.open("https://www.google.com/search?q=black men")
   window.open("https://www.google.com/search?q=black circumsitions")
   window.open("https://www.google.com/search?q=hot sexy black guys working out")
-  window.open("https://www.google.com/search?q=how to clean out your asshole")
-  window.open("https://www.google.com/search?q=jewish kid with hot ribs")
+  window.open("https://www.google.com/search?q=africans killing for water")
+  window.open("https://www.google.com/search?q=jewish kid with ribs and oiled six pack")
   window.open("https://www.google.com/search?q=kyle writtenhouse sexy pictures posed")
   window.open("https://www.google.com/search?q=how to hyjack a school bus")
   window.open("https://www.google.com/search?q=how to know if im pregnant")
   window.open("https://www.google.com/search?q=how to know if i have a std from a boy")
   window.open("https://www.google.com/search?q=lightning mcqueen balls")
   window.open("https://www.google.com/search?q=orphan kids fighting over food")
-  window.open("https://www.google.com/search?q=c & b torture")
+  window.open("https://www.google.com/search?q=mater bater")
+  window.open("https://www.google.com/search?q=is it weird if i taste my own pee")
+  window.open("https://www.google.com/search?q=how to not poo poo your bed at night")
+  window.open("https://www.youtube.com/watch?v=9o3f8WgE1Tk&ab_channel=SoundsFX")
+  window.open("https://www.google.com/search?q=omish woman bussin it down")
+  window.open("https://www.google.com/search?q=jewish people forced to eat pork")
+  window.open("https://www.google.com/search?q=muslim girls turbine being ripped off")
 }
