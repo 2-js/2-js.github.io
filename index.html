@@ -13,17 +13,16 @@
 <input type="button" id="slope" class="button" onclick="document.getElementById('iframe').src = 'https://slopeunblocked.online/slope-unblocked.embed'" value="Slope"></input>
 <input type="button" id="parking" class="button" onclick="document.getElementById('iframe').src = 'https://s3.amazonaws.com/media.safekidgames.com/lets-park/index.html'" value="Parking"></input>
 <input type="button" id="dinogame" class="button" onclick="document.getElementById('iframe').src = 'https://dino.njilc.org/'" value="T-Rex"></input>
-<input type="button" id="unblocker2" class="button" value="submit" onclick="unblock()"></input>
-<input type="input" id="unblocker" placeholder="test" class="button"></input>
+<input type="input" id="site" value="https://www.wikipedia.org/"></input> 
+<input type="button" id="submit" value="submit" onclick="unblog()"></input>
 <br>
 <center>
 <iframe id="iframe" style="border: 0px" width="100%" height="535px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
 </center>
 <script src="myscripts.js"></script>
 <script>
-    var unb = document.getElementById('unblocker').value
-    function unblock() {
-     document.getElementById('iframe').src = unb   
+    function unblog() {
+      document.getElementById('iframe').src = document.getElementById('site').value
     }
 </script>
 <style>
