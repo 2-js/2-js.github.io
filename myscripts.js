@@ -21,7 +21,5 @@ function closeFullscreen() {
 }
 
 function unblock() {
- var val = document.getElementByID('unblocker')
-  document.getElementById('iframe').src = 'http://noderlol.herokuapp.com/proxy/'+val.value
-  alert(val).value
+ alert(document.getElementById('unblocker').value)"
 }
