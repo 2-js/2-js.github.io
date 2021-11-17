@@ -13,7 +13,7 @@
 <input type="button" id="retro" class="button" onclick="retro()" value="Retro Bowl"></input>
 <input type="button" id="slope" class="button" onclick="slope()" value="Slope"></input>
 <input type="button" id="ball" class="button" onclick="ball()" value="Parking"></input>
-<input type="button" id="more" class="moregames" onclick="hub()" value="Unblocker"></input>
+<input type="button" id="more" class="moregames" onclick="window.location.href='/unblocker.html'" value="Unblocker"></input>
 <input type="button" id="hide" class="buttonH" onclick="window.location.href ='https://docs.google.com/'" value="HIDE"></input>
 <br>
 <center>
@@ -23,8 +23,7 @@
 <style>
     .moregames {
   box-shadow: 5px 10px 18px gray;
-  background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);   -webkit-background-clip: text;
-  color: transparent;
+  color: white;
   padding: 14px 20px;
   margin: 8px 0;
   cursor: pointer;
@@ -33,15 +32,11 @@
   transition-duration: 0.4s;
   float: left 5px;
   border: 2px solid transparent;
-  border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  border-image-slice: 1;
   width: 100px;
+  background-color: #33B2FF;
 }
     .moregames:Hover {
-  border-image: linear-gradient(to bottom left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);   -webkit-background-clip: text;
-  border: 2px transparent;
-  border-image-slice: 1;
+  background-color: #3393FF;
     }
     .buttonH {
   box-shadow: 5px 10px 18px gray;
@@ -57,27 +52,7 @@
   float: left 5px;
 }
 .buttonH:hover {
-  background-color: #FFFFFF;
-  color: red;
-  border: 2px solid red;
-  }
-    .buttonS {
-  box-shadow: 5px 10px 18px gray;
-  background-color: green;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: 2px solid green;
-  cursor: pointer;
-  width: 100px;
-  border-radius: 4px;
-  transition-duration: 0.4s;
-  float: left 5px;
-}
-.buttonS:hover {
-  background-color: #FFFFFF;
-  color: green;
-  border: 2px solid green;
+  background-color: #DC0000;
   }
     .button {
   box-shadow: 5px 10px 18px gray;
@@ -93,9 +68,7 @@
   float: left 5px;
 }
 .button:hover {
-  background-color: #FFFFFF;
-  color: black;
-  border: 2px solid #4c4c4c;
+  background-color: #474747;
   }
     .buttonF {
   box-shadow: 5px 10px 18px gray;
@@ -107,7 +80,6 @@
   cursor: pointer;
   width: 50px;
   border-radius: 4px;
-  transition-duration: 0.4s;
   float: left 5px;
 }
 </style>
