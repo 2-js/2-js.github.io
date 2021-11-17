@@ -19,7 +19,3 @@ function closeFullscreen() {
    document.msExitFullscreen();
  }
 }
-
-function unblock() {
- alert(document.getElementById('message').value);
-}
