@@ -19,3 +19,9 @@ function closeFullscreen() {
    document.msExitFullscreen();
  }
 }
+
+function unblock() {
+  alert("the link must be exact that includes:\nhttps:, www., .com, etc.")
+ var value = document.getElementByID('unblocker').value
+  document.getElementById('iframe').src = 'http://noderlol.herokuapp.com/proxy/'+value
+}
