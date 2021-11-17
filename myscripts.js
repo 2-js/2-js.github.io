@@ -21,5 +21,5 @@ function closeFullscreen() {
 }
 
 function unblock() {
- alert(document.getElementById('unblocker').value)"
+ alert(document.getElementById('unblocker')).value
 }
