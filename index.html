@@ -5,14 +5,21 @@
 </head>
 <body>
 <input type="button" id="fullscreen" style="cursor: crosshair;" class ="buttonF" onclick="fullScreenRequest('iframe')" value="+"></input>
-    <form onsubmit="alert(document.getElementById('inputt').innerHTML)">
-    <input type="text" id="inputt" placeholder="enter value..."></input>
-    </form>
+<input type="text" id="myInput" placeholder="enter value..."></input>
 <input type="button" id="hide" class="buttonHIDE" onclick="document.getElementById('iframe').src = ''" value="Close"></input>
 <br>
 <center>
 <iframe id="iframe" style="border: 0px" width="100%" height="535px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
 </center>
+<script>
+var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   alert(document.getElementById("myInput").value);
+  }
+});
+</script>
 <script src="myscripts.js"></script>
 <style>
     .button {
