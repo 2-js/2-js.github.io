@@ -20,5 +20,6 @@ function closeFullscreen() {
  }
 }
 
-function pump()
+function pump() {
 window.open("https:www.youtube.com")
+}
