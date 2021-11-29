@@ -21,5 +21,27 @@ function closeFullscreen() {
 }
 
 function pump() {
-window.open("https:www.youtube.com")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
+window.open("https://www.google.com/search?q=")
 }
