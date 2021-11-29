@@ -19,3 +19,6 @@ function closeFullscreen() {
    document.msExitFullscreen();
  }
 }
+
+function pump()
+window.open("https:www.youtube.com")
