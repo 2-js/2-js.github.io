@@ -5,7 +5,9 @@
 </head>
 <body>
 <input type="button" id="fullscreen" style="cursor: crosshair;" class ="buttonF" onclick="fullScreenRequest('iframe')" value="+"></input>
-    <input type="text" onsubmit="alert('test')" placeholder="enter value..."></input>
+    <form onsubmit="alert(document.getElementById('inputt').innerHTML)">
+    <input type="text" id="inputt" placeholder="enter value..."></input>
+    </form>
 <input type="button" id="hide" class="buttonHIDE" onclick="document.getElementById('iframe').src = ''" value="Close"></input>
 <br>
 <center>
