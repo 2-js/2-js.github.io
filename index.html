@@ -5,10 +5,9 @@
 </head>
 <body>
 <input type="button" id="fullscreen" style="cursor: crosshair;" class ="buttonF" onclick="fullScreenRequest('iframe')" value="+"></input>
-<form action="" method="get">
-<input type="text" name="name"/>
-<div class="yourCustomDiv"/>
-<input type="submit" style="display:none"/>
+<form onsubmit="myFunction()">
+  Enter name: <input type="text">
+  <input type="submit">
 </form>
 <input type="button" id="hide" class="buttonHIDE" onclick="document.getElementById('iframe').src = ''" value="Close"></input>
 <br>
