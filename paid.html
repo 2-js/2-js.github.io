@@ -1,1 +1,36 @@
-
+<html>
+<head>
+<link rel="shortcut icon" type="image/jpg" href="https://www.google.com/docs/about/favicon.ico"/>
+<title> Google Docs: Free Online Documents for Personal Use </title>
+</head>
+<body>
+<input type="button" id="fullscreen" class="button" style="cursor: crosshair;" onclick="fullScreenRequest('iframe')" value="+"></input>
+<input type="text" id="myInput" class="button2" placeholder="enter value..."></input>
+<input type="button" class="button" id="hide" onclick="document.getElementById('iframe').src = ''; document.getElementById('myInput').value = ''" value="Clear"></input> 
+<input type="button" class="button" value="Sites" onclick="pump()"></input>
+<input type="button" class="button" value="Chat" onclick="document.getElementById('iframe').src = 'https://paolown-node-chat-app.herokuapp.com/'"></input>
+<input type="button" class="button" value="Unblocker" onclick="document.getElementById('iframe').src = 'https://kjdi.herokuapp.com/'"
+<br>
+<center>
+<iframe id="iframe" style="border: 0px" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+</center>
+<script>
+var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById('iframe').src = document.getElementById("myInput").value;
+  }
+});
+</script>
+<script src="myscripts.js"></script>
+<style>
+    .button {
+  margin: 8px 0;
+}
+      .button2 {
+  margin: 8px 0;
+}
+</style>
+</body>
+</html>
