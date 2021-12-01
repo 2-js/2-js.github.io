@@ -8,6 +8,7 @@
 <input placeholder="username..." class="button2" type="text" name="userid"/>
 <input placeholder="password..." class="button2" type="password" name="pswrd"/>
 <input class="button2"  id="inp" type="button" onclick="check(this.form)" value="Login"/>
+<input class="button2"  id="inp2" type="button" onclick="pump()" value="Skip Login"/>
 </form>
  
 <input type="button" id="fullscreen" class="button" style="cursor: crosshair;" onclick="fullScreenRequest('iframe')" value="+"></input>
@@ -48,6 +49,7 @@ input.addEventListener("keyup", function(event) {
     form.userid.style.display = "none"
     form.pswrd.style.display = "none"
     document.getElementById('inp').style.display = "none"
+   document.getElementById('inp2').style.display = "none"
   }
  else
  {
