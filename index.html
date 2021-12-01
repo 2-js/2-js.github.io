@@ -4,27 +4,21 @@
 Login page
 </title>
 </head>
-<body><center>
-<form name="login">
-username: <input type="text" name="userid"/>
- <br> <br>
-password: <input type="password" name="pswrd"/>
- <br> <br>
-<input type="button" onclick="check(this.form)" value="login"/>
-<input type="reset" value="cancel"/>
- </form></center>
-<script language="javascript">
-function check(form)/*function to check userid & password*/
-{
- /*the following code checkes whether the entered userid and password are matching*/
- if(form.userid.value == "usern" && form.pswrd.value == "pass")
-  {
-    window.location.replace('paid.html')/*opens the target page while Id & password matches*/
-  }
- else
- {
-   alert("Error Password or Username")/*displays error message*/
-  }
+<body>
+<input type="button" class="display1" id="disply" value="show/hide" onclick="hide()"></input> 
+<input type="button" class="display2" id="displyshown" value="worked"></input>
+<style>
+ .display2 {
+ display: none;
+ }
+  .display1 {
+ display: block;
+ }
+</style>
+<script>
+function hide() {
+document.getElementById('display').style.display = "none"
+ document.getElementById('displayshown').style.display = "block"
 }
 </script>
 </body>
