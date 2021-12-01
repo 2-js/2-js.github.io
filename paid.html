@@ -4,14 +4,23 @@
 <title> Google Docs: Free Online Documents for Personal Use </title>
 </head>
 <body>
+<center>
+<form name="login">
+username: <input class="button2" type="text" name="userid"/> <br> <br>
+password: <input class="button2" type="password" name="pswrd"/> <br> <br>
+<input class="button2"  id="inp" type="button" onclick="check(this.form)" value="Login"/>
+<input class="button2" id="inp" type="reset" value="Cancel"/>
+</form>
+<center>
+ 
 <input type="button" id="fullscreen" class="button" style="cursor: crosshair;" onclick="fullScreenRequest('iframe')" value="+"></input>
-<input type="text" id="myInput" class="button2" placeholder="введите значение ..."></input>
-<input type="button" class="button" id="hide" onclick="document.getElementById('iframe').src = ''; document.getElementById('myInput').value = ''" value="стереть"></input> 
-<input type="button" class="button" value="сайт" onclick="document.getElementById('iframe').src = 'README.md'"></input>
-<input type="button" class="button" value="чат" onclick="document.getElementById('iframe').src = 'https://paolown-node-chat-app.herokuapp.com/'"></input>
-<input type="button" class="button" value="разблокировщик" onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com//'"></input>
-<input type="button" class="button" value="анонимный просмотр" onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/prefix/aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==/'"></input>
-<input type="button" class="butoon" value="скрыть историю" onclick="window.location.replace('https://www.google.com/search?q=google classroom')"></input>
+<input type="text" id="myInput" class="button" placeholder="введите значение ..."></input>
+<input id="logged" type="button" class="button" onclick="document.getElementById('iframe').src = ''; document.getElementById('myInput').value = ''" value="стереть"></input> 
+<input id="logged" type="button" class="button" value="сайт" onclick="document.getElementById('iframe').src = 'README.md'"></input>
+<input id="logged" type="button" class="button" value="чат" onclick="document.getElementById('iframe').src = 'https://paolown-node-chat-app.herokuapp.com/'"></input>
+<input id="logged" type="button" class="button" value="разблокировщик" onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com//'"></input>
+<input id="logged" type="button" class="button" value="анонимный просмотр" onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/prefix/aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==/'"></input>
+<input id="logged" type="button" class="butoon" value="скрыть историю" onclick="window.location.replace('https://www.google.com/search?q=google classroom')"></input>
 <br>
 <center>
 <iframe id="iframe" style="border: 0px" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
@@ -24,14 +33,37 @@ input.addEventListener("keyup", function(event) {
    document.getElementById('iframe').src = document.getElementById("myInput").value;
   }
 });
+  */////
+  function check(form)
+  {
+ if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd")
+  {
+    var loggedin1 = document.getElementById('myInput')
+    var loggedin2 = document.getElementById('fullscreen')
+    var loggedin3 = document.getElementById('logged')
+    loggedin3.style.display = "block"
+    loggedin2.style.display = "block"
+    loggedin1.style.display = "block"
+    form.userid.style.display = "none"
+    form.pswrd.style.display = "none"
+    document.getElementById('inp').style.display = "none"
+  }
+ else
+ {
+   alert("Error Password or Username")
+  }
+}
+
 </script>
 <script src="myscripts.js"></script>
 <style>
     .button {
   margin: 8px 0;
+  display: none;
 }
       .button2 {
   margin: 8px 0;
+  display: block;
 }
 </style>
 </body>
