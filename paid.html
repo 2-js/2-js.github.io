@@ -1,26 +1,75 @@
-<html>
-<head>
-<link rel="shortcut icon" type="image/jpg" href="https://www.google.com/docs/about/favicon.ico"/>
-<title> Google Docs: Free Online Documents for Personal Use </title>
-</head>
-<body>
-<input type="button" id="fullscreen" class="button" style="cursor: crosshair;" onclick="fullScreenRequest('iframe')" value="+"></input>
-<input id="logged" type="button" class="button" onclick="document.getElementById('iframe').src = ''; document.getElementById('myInput').value = ''" value="clear"></input> 
-<input id="logged1" type="button" class="button" value="sites / help" onclick="document.getElementById('iframe').src = 'README.md'"></input>
-<input id="logged2" type="button" class="button" value="socket.io chat" onclick="document.getElementById('iframe').src = 'https://paolown-node-chat-app.herokuapp.com/'"></input>
-<input id="logged3" type="button" class="button" value="taco proxy" onclick="document.getElementById('iframe').src = 'https://ksjx.herokuapp.com/'"></input>
-<input id="logged4" type="button" class="button" value="unrestricted google" onclick="document.getElementById('iframe').src = 'https://ksjx.herokuapp.com/web/_aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==_/'"></input>
-<input id="logged5" type="button" class="button" value="youtube" onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/prefix/aHR0cHM6Ly93d3cueW91dHViZS5jb20=/'"></input>
 
-<br>
-<center>
-<iframe id="iframe" style="border: 0px" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
-</center>
-<script src="myscripts.js"></script>
-<style>
-    .button {
-  margin: 8px 0;
-}
-</style>
-</body>
-</html>
+  <head>
+    <link rel="shortcut icon" type="image/jpg" href="https://cf.quizizz.com/img/favicon/favicon.ico"/>
+    <title> Summary - Quizizz </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="nav_links"> 
+          <li><a onclick="document.getElementById('iframe').src = 'https://gmail.com/'">Proxy</a></li>
+        </ul>
+      </nav>
+      <a class="cta"><button onclick="fullScreenRequest('iframe')">Fullscreen</button></a>
+    </header>  
+    <iframe id="iframe" style="border: 0px;" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
+    <style>
+      * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      background-color: #FFFFFF;
+      }
+      
+      li, a, button {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #24252A;
+      text-decoration: none;
+      cursor: pointer;
+      }
+      
+      header {
+      display: flex;
+      justify-content: space-between;
+      allign-items: center;
+      padding: 10px 5%;
+      }
+      
+      .nav_links {
+      list-style: none;
+      }
+      
+      .nav_links li {
+      display: inline-block;
+      padding: 9px 20px
+      }
+      
+      .nav_links li a {
+      transition: all 0.3s ease 0s;
+      }
+      
+      .nav_links li a:hover {
+      color: #0088a9
+      }
+      
+      button {
+      padding: 9px 25px;
+      background-color: rgba(0,136,168,1);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      color: #FFFFFF
+      }
+      
+      button:hover {
+      background-color: rgba(0,136,168,0.8);
+      }
+    </style>
+    <script src="myscripts.js"></script>
+  </body
