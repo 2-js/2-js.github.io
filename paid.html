@@ -1,75 +1,200 @@
+<head>
+</head>
+<body>
+<div class="navigation">
+	<ul class="listWrap">
+		<li class="list active">
+			<a href="javascript:void(0);">
+				<i class="icon">
+					<ion-icon name="home-outline"></ion-icon>
+				</i>
+				<span class="text">Home</span>
+			</a>
+		</li>
+		<li class="list">
+			<a onclick="alert('test')">
+				<i class="icon">
+					<ion-icon name="information-circle-outline"></ion-icon>
+				</i>
+				<span class="text">About</span>
+			</a>
+		</li>
+		<li class="list">
+			<a href="javascript:void(0);">
+				<i class="icon">
+					<ion-icon name="person-outline"></ion-icon>
+				</i>
+				<span class="text">Profile</span>
+			</a>
+		</li>
+		<li class="list">
+			<a href="javascript:void(0);">
+				<i class="icon">
+					<ion-icon name="settings-outline"></ion-icon>
+				</i>
+				<span class="text">Settings</span>
+			</a>
+		</li>
+		<li class="indicator"></li>
+	</ul>
+</div>
+<script>
+  const listItem = document.querySelectorAll('.list');
 
-  <head>
-    <link rel="shortcut icon" type="image/jpg" href="https://cf.quizizz.com/img/favicon/favicon.ico"/>
-    <title> Summary - Quizizz </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul class="nav_links"> 
-          <li><a onclick="document.getElementById('iframe').src = 'https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox'">Proxy</a></li>
-        </ul>
-      </nav>
-      <a class="cta"><button onclick="fullScreenRequest('iframe')">Fullscreen</button></a>
-    </header>  
-    <iframe id="iframe" style="border: 0px;" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
-    <style>
-      * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      background-color: #FFFFFF;
-      }
-      
-      li, a, button {
-      font-family: "Montserrat", sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color: #24252A;
-      text-decoration: none;
-      cursor: pointer;
-      }
-      
-      header {
-      display: flex;
-      justify-content: space-between;
-      allign-items: center;
-      padding: 10px 5%;
-      }
-      
-      .nav_links {
-      list-style: none;
-      }
-      
-      .nav_links li {
-      display: inline-block;
-      padding: 9px 20px
-      }
-      
-      .nav_links li a {
-      transition: all 0.3s ease 0s;
-      }
-      
-      .nav_links li a:hover {
-      color: #0088a9
-      }
-      
-      button {
-      padding: 9px 25px;
-      background-color: rgba(0,136,168,1);
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease 0s;
-      color: #FFFFFF
-      }
-      
-      button:hover {
-      background-color: rgba(0,136,168,0.8);
-      }
-    </style>
-    <script src="myscripts.js"></script>
-  </body
+function activateLink() {
+	listItem.forEach( item => {
+		item.classList.remove('active');
+	});
+	this.classList.add('active');
+}
+
+listItem.forEach( item => {
+	item.addEventListener('click', activateLink);
+});
+
+</script>
+  
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.4rem;
+	-webkit-tap-highlight-color: transparent;
+}
+
+:root {
+	--bg-default: #222327;
+	--primary-white: #ffffff;
+	--primary-red: #ff3c41;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: var(--bg-default);
+}
+
+.navigation {
+	width: 360px;
+	height: 70px;
+	background: var(--primary-white);
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	padding: 0 20px;
+	.listWrap {
+		list-style: none;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		li {
+			width: 70px;
+			height: 70px;
+			position: relative;
+			z-index: 1;
+			a {
+				text-decoration: none;
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				text-align: center;
+				font-weight: 500;
+				width: 100%;
+				&:hover {
+					text-decoration: none;
+				}
+				.icon {
+					position: relative;
+					display: block;
+					line-height: 75px;
+					text-align: center;
+					transition: 0.5s;
+					color: var(--bg-default);
+					ion-icon {
+						font-size: 2.2rem;
+					}
+				}
+				.text {
+					position: absolute;
+					color: var(--bg-default);
+					font-weight: 400;
+					letter-spacing: 0.05em;
+					transition: 0.5s;
+					transform: translateY(20px);
+					opacity: 0;
+					z-index: 1;
+				}
+			}
+			&:active, &.active {
+				a {
+					.icon {
+						color: var(--primary-white);
+						transform: translateY(-32px);
+					}
+					.text {
+						opacity: 1;
+						transform: translateY(10px);
+					}
+				}
+			}
+			&.indicator {
+				position: absolute;
+				width: 70px;
+				height: 70px;
+				top: -50%;
+				border-radius: 50%;
+				border: 6px solid var(--bg-default);
+				background: var(--primary-red);
+				transition: 0.3s;
+				z-index: 0;
+				&:before, &:after {
+					content: '';
+					position: absolute;
+					top: 50%;
+					width: 20px;
+					height: 20px;
+					background: blue;
+					background: transparent;
+				}
+				&:after {
+					right: -22px;
+					box-shadow: -1px -10px 0 0 var(--bg-default);
+					border-top-left-radius: 20px;
+				}
+				&:before {
+					left: -22px;
+					box-shadow: 1px -10px 0 0 var(--bg-default);
+					border-top-right-radius: 20px;
+				}
+			}
+			&:nth-child(1).active ~ .indicator {
+				transform: translateX(calc(70px * 0));
+			}
+			&:nth-child(2).active ~ .indicator {
+				transform: translateX(calc(70px * 1 + (6px * 2)));
+			}
+			&:nth-child(3).active ~ .indicator {
+				transform: translateX(calc(70px * 2 + (6px * 4) + 1px));
+			}
+			&:nth-child(4).active ~ .indicator {
+				transform: translateX(calc(70px * 3 + (6px * 6) + 2px));
+			}
+		}
+	}
+}
+</style>
+</body>
