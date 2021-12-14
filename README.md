@@ -6,16 +6,13 @@ youtube not loading or `Cannot GET /watch`
 
 
 ```js
-// @twit   https://nitter.fdn.fr/
+// @proxy v1.0   https://github.com/Tacosheel/TacoProxy
 
-// @quiz   https://quizit.online
+// @proxy v2.0   https://github.com/Tacosheel/TacoProxyV2
 
-// @taco   https://github.com/Tacosheel/TacoProxy
+// @proxy v2.1   https://github.com/FogNetwork/Tsunami
 
-// @yout   https://us.vlip.lv
+//lookmovies.ag
 
-// @redi   https://libredd.it/
+//quizit.online
 
-// @sndc   http://keepsaveit.com/audio-songs/
-
-// @node   https://github.com/nfriedly/nodeunblocker.com
