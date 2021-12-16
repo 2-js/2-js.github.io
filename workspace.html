@@ -1,81 +1,25 @@
+<head>
+</head>
+</body>
+<input id='weight' placeholder='weight of grade...' style='width: 110px;'></input>
+<input id='test_grade' placeholder='test grade...' style='width: 80px;'></input>
+<input id='grade'placeholder='current grade...' style='width: 100px'></input>
+<button onclick="getgrades()">final grade</button>
+<br>
+<a id='text'></a>
+<script>
+function getgrades() {
+var test = document.getElementById('test_grade').value
+var grade = document.getElementById('grade').value
+var weightgrade = document.getElementById('weight').value
+var weight2 = weightgrade / 100
+var remainder = 1 - weight2
+var final = weight2 * test + remainder * grade; document.getElementById('text').innerHTML = final
+} 
+</script>
+<style>
+button {
 
-  <head>
-    <link rel="shortcut icon" type="image/jpg" href="https://cf.quizizz.com/img/favicon/favicon.ico"/>
-    <title> Summary - Quizizz </title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul class="nav_links">
-          <li><a onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/'">Proxy v1</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://ijgb.herokuapp.com/'">Proxy v2</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/prefix/aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==/'">Google v1</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://ijgb.herokuapp.com/web/_aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==_/'">Google v2</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://kajh2.herokuapp.com/prefix/aHR0cHM6Ly93d3cueW91dHViZS5jb20=/'">Youtube</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://ijgb.herokuapp.com/web/_aHR0cHM6Ly9pbnZpZGlvdXMubXV0YWhhci5yb2Nrcw==_/'">Youtube Instance</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://paolown-node-chat-app.herokuapp.com/'">Chat</a></li>
-          <li><a onclick="document.getElementById('iframe').src = 'https://quizit.online/pin/'">Quizit</a></li>
-        </ul>
-      </nav>
-      <a class="cta"><button onclick="fullScreenRequest('iframe')">Fullscreen</button></a>
-    </header>  
-    <iframe id="iframe" style="border: 0px;" width="100%" height="560px" src="" sandbox="allow-same-origin allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-scripts"></iframe>
-    <style>
-      * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      background-color: #24252A;
-      }
-      
-      li, a, button {
-      font-family: "Montserrat", sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color: #edf0f1;
-      text-decoration: none;
-      cursor: pointer;
-      }
-      
-      header {
-      display: flex;
-      justify-content: space-between;
-      allign-items: center;
-      padding: 10px 5%;
-      }
-      
-      .nav_links {
-      list-style: none;
-      }
-      
-      .nav_links li {
-      display: inline-block;
-      padding: 9px 20px
-      }
-      
-      .nav_links li a {
-      transition: all 0.3s ease 0s;
-      }
-      
-      .nav_links li a:hover {
-      color: #0088a9
-      }
-      
-      button {
-      padding: 9px 25px;
-      background-color: rgba(0,136,168,1);
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease 0s;
-      }
-      
-      button:hover {
-      background-color: rgba(0,136,168,0.8);
-      }
-    </style>
-    <script src="myscripts.js"></script>
-  </body
+}
+</style>
+</body> 
