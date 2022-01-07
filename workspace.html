@@ -4,11 +4,10 @@
 
 </body>
 <script>
-document.addEventListener("keypress", function(event) {
-  if (event.keyCode == 69) {
-    alert('hi.');
-  }
-});
+document.onkeypress = function (e) {
+    e = e || window.event;
+    alert('hi')
+};
 </script>
 <style>
   body { margin: 0px }
