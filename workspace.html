@@ -140,9 +140,11 @@
 <script src="myscripts.js">
 </script>
   <script> 
+    var nodes = document.querySelectorAll("*");
 document.onkeypress = function (e) {
     e = e || window.event;
-    document.style.display = 'block'
+    nodes.style.display = "block";
+
 };
   </script>
 </body>
