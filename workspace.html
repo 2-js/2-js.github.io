@@ -142,9 +142,10 @@
   <script> 
     var nav = document.getElementById("display2"),
     lis = nav.getElementsByTagName("*"),
-    document.onkeypress = function (e) {
-    e = e || window.event;
-    lis.style.display = "block";
-};
+$('#usersearch').keydown(function(e){
+    if(e.keyCode === 13){
+            alert("Enter was pressed ");
+     }  
+});
   </script>
 </body>
