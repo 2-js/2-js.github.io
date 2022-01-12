@@ -140,18 +140,11 @@
 <script src="myscripts.js">
 </script>
   <script> 
-    
-    document.onkeypress = function (e) {
-    e = e || window.event;
     var nav = document.getElementById("display2"),
     lis = nav.getElementsByTagName("*"),
-    l = lis.length,
-    i = 0;
-for (i; i < l; i++) { 
-    lis[i].style.display = "block";
-}
-
-
+    document.onkeypress = function (e) {
+    e = e || window.event;
+    lis.style.display = "block";
 };
   </script>
 </body>
