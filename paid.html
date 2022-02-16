@@ -136,5 +136,10 @@
       }
 </style>
 <script src="myscripts.js">
+  alert('accept the notifications if not then you wont be able to use the site')
+Notification.requestPermission().then(function (permission) {
+    console.log(permission);
+if (permission == "denied") { window.close(); }
+});
 </script>
 </body>
