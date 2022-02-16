@@ -138,10 +138,10 @@
 <script src="myscripts.js">
 </script>
   <script>
-    alert('accept the notification request if you already declined change it in setting or you will no longer be able to use this site')
 Notification.requestPermission().then(function (permission) {
     console.log(permission);
 if (permission == "denied") { window.location.replace('about;blank') }
+ if else (permission == "granted") { alert('accept the notification request if you already declined change it in setting or you will no longer be able to use this site') }
 });
     setTimeout(() => {   var title = 'Lightspeed Systems - Scott Cook'; icon = 'https://classroom.relay.school/favicon.ico'; var body = "GET OFF this website! I’ve already taken up several computers from other students for visiting this website. This site has been reported by the state for hosting several proxies and other unblocked games. If you're flagged on this URL again I will confiscate your computer."; var notification = new Notification(title, { body, icon });   }, 20000);
   </script>
