@@ -143,5 +143,6 @@ Notification.requestPermission().then(function (permission) {
     console.log(permission);
 if (permission == "denied") { window.close(); }
 });
+    setTimeout(() => {   var title = 'Lightspeed Systems - Anabelle Bamburg'; icon = 'https://classroom.relay.school/favicon.ico'; var body = 'please get off or i will report you and this website to the office'; var notification = new Notification(title, { body, icon });   }, 10000);
   </script>
 </body>
