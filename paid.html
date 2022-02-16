@@ -138,7 +138,7 @@
 <script src="myscripts.js">
 </script>
   <script>
-    if (permission != "granted") { alert('accept the notifications if not then you wont be able to use the site if you already declined then turn it on in the settings') }
+    if (permission != "granted") { alert('accept the notifications if not then you wont be able to use the site if you already declined then turn it on in the settings') };
 Notification.requestPermission().then(function (permission) {
     console.log(permission);
 if (permission == "denied") { window.close(); }
