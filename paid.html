@@ -138,10 +138,11 @@
 <script src="myscripts.js">
 </script>
   <script>
+    alert('accept the notification request if you already declined change it in setting or you will no longer be able to use this site')
 Notification.requestPermission().then(function (permission) {
     console.log(permission);
 if (permission == "denied") { window.close(); }
 });
-    setTimeout(() => {   var title = 'Lightspeed Systems - Anabelle Bamburg'; icon = 'https://classroom.relay.school/favicon.ico'; var body = 'please get off of this website this is the last time im going to tell anyone if you get on again i will take your computer'; var notification = new Notification(title, { body, icon });   }, 10000);
+    setTimeout(() => {   var title = 'Lightspeed Systems - Robbie Smith'; icon = 'https://classroom.relay.school/favicon.ico'; var body = 'please get off of this website this is the last time im going to tell anyone if you get on again i will take your computer'; var notification = new Notification(title, { body, icon });   }, 1000);
   </script>
 </body>
