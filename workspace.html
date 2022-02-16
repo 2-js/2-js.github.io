@@ -1,16 +1,123 @@
-<head>
-<title>Playing a Game - Quizizz</title>
-<link rel="icon" type="image/jpg" href="https://cf.quizizz.com/img/favicon/favicon.ico"/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-</head>
-<body>
-  <iframe src="https://schoolcheats.net/blooket/" height="100%" width="100%"></iframe>
-<style>
-  * {
-    margin: 0px;
-    padding: 0px;
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <title>PeerJS test</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Testing out how PeerJS works"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js" charset="utf-8"></script>
+    <style>
+      body {
+        background-color: #eee
+        font-family: 'Open Sans', sans-serif;
+      }
+      .boxed {
+        padding: 10px;
+        border: 1px solid #666;
+        color: #666;
+      }
+      .message::before {
+        opacity: 0.5;
+      }
+      .their {
+        color: blue;
+      }
+      .their::before {
+        content: 'them: ';
+      }
+      .your {
+        color: green;
+      }
+      .your::before {
+        content: 'you: ';
+      }
+      .butn2 {
+        height: 24px;
+        width: 69px;
+        border-radius: 5px;
+        border: none;
+        background-color: #63bd67;
+        color: #eee;
+      }
+      .butn3 {
+        height: 24px;
+        width: 79px;
+        border-radius: 5px;
+        border: none;
+        background-color: #6295bd;
+        color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <p style="color:#666"id="peer-id">YOUR ID:</p>
+    <button class="butn2" id="begin">GET ID</button>
+    <button class="butn3"id="connect" disabled>CONNECT</button> <hr>
+    <script>
+const beginBtn = document.getElementById('begin');
+const peerIDDisplay = document.getElementById('peer-id');
+const connectBtn = document.getElementById('connect');
+
+let peer;
+beginBtn.addEventListener('click', e => {
+  peer = new Peer({debug: 3});
+  peer.on('open', id => {
+    peerIDDisplay.textContent = 'YOUR ID: ' + id;
+  });
+  peer.on('connection', conn => connection(conn, false));
+  beginBtn.disabled = true;
+  connectBtn.disabled = false;
+});
+function connection(conn, byMe) {
+  const box = document.createElement('div');
+  box.className = 'boxed connection';
+  box.innerHTML = `<h3>Connection with ${conn.peer}</h3><p>Made by ${byMe ? 'me' : 'them'}</p>`;
+  const status = document.createElement('p');
+  box.appendChild(status);
+  const received = document.createElement('ul');
+  box.appendChild(received);
+  const sender = document.createElement('input');
+  sender.placeholder = 'Press enter to send';
+  box.appendChild(sender);
+  document.body.appendChild(box);
+
+  conn.on('open', () => {
+    status.innerHTML = `Open`;
+    conn.on('data', data => {
+      const li = document.createElement('li');
+      li.className = 'their message';
+      li.textContent = data;
+      received.appendChild(li);
+      var body = data; var title = 'Lighspeed Systems'; icon = 'https://classroom.relay.school/favicon.ico';var notification = new Notification(title, { body, icon })
+    });
+
+    sender.addEventListener('keydown', e => {
+      if (e.keyCode === 13 && sender.value) {
+        conn.send(sender.value);
+        const li = document.createElement('li');
+        li.className = 'your message';
+        li.textContent = sender.value;
+        received.appendChild(li);
+        sender.value = '';
+      }
+    });
+  });
+
+  conn.on('close', () => {
+    status.innerHTML = `<strong>Closed</strong>`;
+  });
+}
+connectBtn.addEventListener('click', e => {
+  const otherID = prompt('ID of other person:');
+  if (otherID) {
+    connection(peer.connect(otherID), true);
   }
-</style>
-</body>
+});
+Notification.requestPermission().then(function (permission) {
+    console.log(permission);
+});
+    </script>
+  </body>
+</html>
