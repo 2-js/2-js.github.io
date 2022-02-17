@@ -190,7 +190,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-      addMessageToListDOM(text, member);
+      var body = text; var title = 'message';var notification = new Notification(title, { body });
     } else {
       // Message is from server
     }
@@ -276,7 +276,5 @@ function addMessageToListDOM(text, member) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
 }
-    const room = drone.subscribe('my-room');
-room.on('message', message => var body = message; var title = 'message';var notification = new Notification(title, { body }) );
   </script>
 </body>
