@@ -175,7 +175,7 @@ function createMemberElement(member) {
 
 function updateMembersDOM() {
   var doctitle = document.title = `${members.length} online`;
-  DOM.membersCount.innerText = `${members.length} users in room:`;
+  DOM.membersCount.innerText = `test1\ntest2\nalert('')\n=> function(){}`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
