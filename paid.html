@@ -140,13 +140,6 @@
 <script src="myscripts.js">
 </script>
   <script>
-    alert('accept the notification request if you already declined change it in setting or you will no longer be able to use this site')
-Notification.requestPermission().then(function (permission) {
-    console.log(permission);
-if (permission == "denied") { window.location.replace('about;blank') }
-});
-  </script>
-  <script>
   const CLIENT_ID = 'Wa9787NIBwG7ckyH';
 
 const drone = new ScaleDrone(CLIENT_ID, {
