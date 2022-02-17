@@ -190,7 +190,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-      var body = text; var title = 'message';var notification = new Notification(title, { body });
+      var body = text; var title = 'MESSAGE FROM 2-JS';var notification = new Notification(title, { body });
     } else {
       // Message is from server
     }
