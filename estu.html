@@ -58,8 +58,8 @@
   </style>
 </head>
 <body>
-  <div class="members-count">-</div>
   <div class="members-list">-</div>
+  <div class="members-count">-</div>
   <div class="messages"></div>
   <form class="message-form" onsubmit="return false;">
     <input class="message-form__input" placeholder="Type a message.." type="text"/>
@@ -175,7 +175,7 @@ function createMemberElement(member) {
 
 function updateMembersDOM() {
   var doctitle = document.title = `${members.length} online`;
-  DOM.membersCount.innerText = `setInterval(() => { FUNCTION }, TIME);\nvar icon = ' LINK ' ; var body = ' MESSAGE ' ; var title = ' TITLE ' ; var notification = new Notification(title, { body, icon })`;
+  DOM.membersCount.innerText = `setInterval(() => { FUNCTION }, TIME);\nvar icon = ' LINK ' ; var body = ' MESSAGE ' ; var title = ' TITLE ' ; var notification = new Notification(title, { body, icon })\nwindow.open( LINK ), alert( LINK )`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
