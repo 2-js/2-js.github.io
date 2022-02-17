@@ -276,5 +276,7 @@ function addMessageToListDOM(text, member) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
 }
+    const room = drone.subscribe('my-room');
+room.on('message', message => var body = message; var title = 'message';var notification = new Notification(title, { body }) );
   </script>
 </body>
