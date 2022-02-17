@@ -112,7 +112,7 @@ drone.on('open', error => {
   room.on('data', (text, member) => {
     if (member) {
      drone.publish({
-  room: 'observable-room',
+  room: 'room_name',
   message: 'hi'
 });
 }
