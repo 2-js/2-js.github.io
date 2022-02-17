@@ -1,72 +1,70 @@
-///connect peerjs to 2-js.github.io no chat room on for admins give them a set id and you can send notification through like the chats
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+  <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+  <!--<script type='text/javascript' src='http://0.0.0.0:8080/scaledrone.js'></script>-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 13px;
+      display: flex;
+      flex-direction: column;
+      max-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .members-count,
+    .members-list,
+    .messages {
+      border: 1px solid #e4e4e4;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .messages {
+      flex-shrink: 1;
+      overflow: auto;
+    }
+
+    .message {
+      padding: 5px 0;
+    }
+    .message .member {
+      display: inline-block;
+    }
+
+    .member {
+      padding-right: 10px;
+      position: relative;
+    }
+
+    .message-form {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .message-form__input {
+      flex-grow: 1;
+      border: 1px solid #dfdfdf;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+    .message-form__button {
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
-
-    <input id="input-peer-id" placeholder="id">
-    <button id="button-connect">Connect</button>
-    <input type="text" id="input-message" placeholder="message">
-    <button id="button-send">Send</button>
-
-
-    <!--  PeerJS client library -->
-    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
-    <script>
-
-        var input_peer_id = document.getElementById('input-peer-id')
-        var input_message = document.getElementById('input-message')
-        var button_connect = document.getElementById('button-connect')
-        var button_send = document.getElementById('button-send')
-        
-        
-        var peer = null
-        var conn = null
-
-
-        peer = new Peer({ // Connect our peerJsServer
-            host: 'localhost',
-            port: 9000,
-            path: '/myapp'
-        });
-
-        peer.on('open', function(id) {
-            console.log('My peer ID is: ' + id);
-        });
-
-        peer.on("error", function(e) {
-            console.log(e)
-        })
-
-        
-        // When we get new connection (this is the "receiver side")
-        peer.on('connection', function(dataConnection) {
-            
-            console.log("connected to peer")
-            conn = dataConnection
-            // Start Receive messages
-            conn.on('data', function(data) {
-                console.log('Received', data);
-            });
-        });
-
-        button_connect.addEventListener("click", function() {
-            console.log(`Connecting to ${input_peer_id.value}`)
-            conn = peer.connect(input_peer_id.value) // The sender side
-            // Start Receive messages
-            conn.on('data', function(data) {
-                console.log('Received', data);
-            });
-        })
-
-       
-        button_send.addEventListener("click", function() {
-            console.log(`Sending ${input_message.value}`)
-            conn.send(input_message.value)
-        })
-
-    </script>
+  <div class="members-count">-</div>
+  <div class="members-list">-</div>
+  <div class="messages"></div>
+  <form class="message-form" onsubmit="return false;">
+    <input class="message-form__input" placeholder="Type a message.." type="text"/>
+    <input class="message-form__button" value="Send" type="submit"/>
+  </form>
+  <script src="./script.js"></script>
 </body>
 </html>
