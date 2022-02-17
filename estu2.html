@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,7 @@ const CLIENT_ID = 'Wa9787NIBwG7ckyH';
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
     name: getRandomName(),
-    color: '#00FF00',
+    color: '#FF0000',
   },
 });
 
@@ -111,8 +112,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-    window.open(text)
-}
+      window.open(text)
     } else {
       // Message is from server
     }
