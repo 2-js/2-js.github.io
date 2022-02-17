@@ -111,10 +111,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-     drone.publish({
-  room: 'room_name',
-  message: 'hi'
-});
+    window.open(text)
 }
     } else {
       // Message is from server
