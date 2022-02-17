@@ -111,16 +111,10 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-     function sendMessage() {
-  const value = DOM.input.value;
-  if (value === '') {
-    return;
-  }
-  DOM.input.value = '';
-  drone.publish({
-    room: 'observable-room',
-    message: 'hi',
-  });
+     drone.publish({
+  room: 'observable-room',
+  message: 'hi'
+});
 }
     } else {
       // Message is from server
