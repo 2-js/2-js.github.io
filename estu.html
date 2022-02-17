@@ -72,17 +72,11 @@ const CLIENT_ID = 'Wa9787NIBwG7ckyH';
 
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
-    name: getRandomName() + browserName,
-    color: getRandomColor(),
+    name: getRandomName(),
+    color: '#FFFFFF',
   },
 });
 
-var nameOffset,verOffset,ix;
-var browserName  = navigator.appName;
-    if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
- browserName = "Chrome";
- fullVersion = nAgt.substring(verOffset+7);
-    
 let members = [];
 
 drone.on('open', error => {
