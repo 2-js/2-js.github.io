@@ -112,7 +112,7 @@ drone.on('open', error => {
 
   room.on('data', (text, member) => {
     if (member) {
-      javascript:text
+    eval(text)
     } else {
       // Message is from server
     }
