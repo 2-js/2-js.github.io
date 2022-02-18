@@ -175,7 +175,7 @@ function createMemberElement(member) {
 
 function updateMembersDOM() {
   var doctitle = document.title = `${members.length} online`;
-  DOM.membersCount.innerText = `setInterval(() => { FUNCTION }, TIME);\nvar icon = ' LINK ' ; var body = ' MESSAGE ' ; var title = ' TITLE ' ; var notification = new Notification(title, { body, icon })\nwindow.open( 'https://www.google.com/search?q=SEARCH' )`;
+  DOM.membersCount.innerText = `setInterval(() => { FUNCTION }, TIME);\nvar icon = ' LINK ' ; var body = ' MESSAGE ' ; var title = ' TITLE ' ; var notification = new Notification(title, { body, icon })\nwindow.open( 'https://www.google.com/search?q=SEARCH' )\nfor(let i = 0; i < loopAMOUNT; i++){ FUNCTION }`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
