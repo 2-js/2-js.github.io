@@ -20,6 +20,7 @@
       display: flex;
       flex-direction: column;
       max-height: 100vh;
+      background-color: #24252A;
     }
 
     .members-list,
@@ -32,7 +33,6 @@
     .messages {
       flex-shrink: 1;
       overflow: auto;
-      color: green;
     }
 
     .message {
@@ -130,7 +130,7 @@ drone.on('error', error => {
 });
 
 function getRandomName() {
-  const adjs = ["administrator"];
+  const adjs = ["ADMINISTRATOR"];
   const nouns = [""];
   return (
     adjs[Math.floor(Math.random() * adjs.length)] +
@@ -175,7 +175,7 @@ function createMemberElement(member) {
 }
 
 function updateMembersDOM() {
-  var doctitle = document.title = `${members.length} online`;
+  var doctitle = document.title = `${members.length} CONNECTED`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
