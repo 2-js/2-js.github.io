@@ -132,11 +132,10 @@ drone.on('error', error => {
 });
 
 function getRandomName() {
-  const adjs = ["admin"];
+  const adjs = ["administrator"];
   const nouns = [""];
   return (
     adjs[Math.floor(Math.random() * adjs.length)] +
-    "_" +
     nouns[Math.floor(Math.random() * nouns.length)]
   );
 }
@@ -148,7 +147,6 @@ function getRandomColor() {
 //------------- DOM STUFF
 
 const DOM = {
-  membersCount: document.querySelector('.members-count'),
   membersList: document.querySelector('.members-list'),
   messages: document.querySelector('.messages'),
   input: document.querySelector('.message-form__input'),
@@ -180,7 +178,6 @@ function createMemberElement(member) {
 
 function updateMembersDOM() {
   var doctitle = document.title = `${members.length} online`;
-  DOM.membersCount.innerText = `fetch( 'https://ipapi.co/json/' )  .then(function(response){ return response.json(); })  .then(function(data) { drone.publish( {room: 'observable-room', message: JSON.stringify(data),} )});\nsetInterval(() => { FUNCTION }, TIME);\nvar body = '  '; var title = '  '; var notification = new Notification(title, { body })\nwindow.open( 'https://www.google.com/search?q=SEARCH' )\nfor(let i = 0; i < loopAMOUNT; i++){ FUNCTION }\nhistory.pushState( state, title, url )`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
