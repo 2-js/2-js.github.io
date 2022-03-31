@@ -139,9 +139,6 @@
       }
 </style>
 <script>
-document.addEventListener( 'visibilitychange' , function() {     if (document.hidden) {         console.log('debug');     } else {         history.go(0)     } }, false );
-</script>
-<script>
 function fullScreenRequest(id) {
   if (document.getElementById(id).requestFullscreen) {
     document.getElementById(id).requestFullscreen();
