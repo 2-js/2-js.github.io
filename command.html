@@ -129,6 +129,15 @@ drone.on('error', error => {
   console.error(error);
 });
 
+const room = drone.subscribe('observable-room', {
+  historyCount: 100 // ask for the 100 latest messages from history
+});
+
+room.on('history_message', ({data}) => {
+  console.log(data);
+  sendMessage(data);
+});
+
 function getRandomName() {
   const adjs = ["ADMINISTRATOR"];
   const nouns = [""];
