@@ -133,7 +133,7 @@ drone.on('error', error => {
 const room = drone.subscribe('observable-room', {
   historyCount: 5
 });
-room.on('history_message', message => createMessageElement(message));
+room.on('history_message', message => addMessageToListDOM(message));
 
 function getRandomName() {
   const adjs = ["ADMINISTRATOR"];
