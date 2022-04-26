@@ -129,14 +129,11 @@ drone.on('error', error => {
   console.error(error);
 });
 
-const room = drone.subscribe('observable-room', {
-  historyCount: 100 // ask for the 100 latest messages from history
-});
 
-room.on('history_message', ({data}) => {
-  console.log(data);
-  addMessageToListDOM(data);
+const room = drone.subscribe('observable-room', {
+  historyCount: 5
 });
+room.on('history_message', message => sendMessage(message));
 
 function getRandomName() {
   const adjs = ["ADMINISTRATOR"];
