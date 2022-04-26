@@ -135,7 +135,7 @@ const room = drone.subscribe('observable-room', {
 
 room.on('history_message', ({data}) => {
   console.log(data);
-  sendMessage(data);
+  addMessageToListDOM(data);
 });
 
 function getRandomName() {
