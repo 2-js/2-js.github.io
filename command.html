@@ -76,7 +76,7 @@ const CLIENT_ID = 'Wa9787NIBwG7ckyH';
 const drone = new ScaleDrone(CLIENT_ID, {
   data: { // Will be sent out as clientData via events
     name: getRandomName(),
-    color: '#FF0000',
+    color: '#808080',
   },
 });
 
@@ -129,13 +129,8 @@ drone.on('error', error => {
   console.error(error);
 });
 
-const room = drone.subscribe('observable-room', {
-  historyCount: 5
-});
-room.on('history_message', message => addMessageToListDOM(JSON.stringify(message)));
-
 function getRandomName() {
-  const adjs = ["ADMINISTRATOR"];
+  const adjs = ["script"];
   const nouns = [""];
   return (
     adjs[Math.floor(Math.random() * adjs.length)] +
