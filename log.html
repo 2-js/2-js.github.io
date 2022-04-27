@@ -63,7 +63,7 @@ drone.on('open', error => {
 drone.on('close', event => console.log('Connection was closed', event));
 drone.on('error', error => console.error(error));
 
-const room = drone.subscribe('feed', {
+const room = drone.subscribe('log', {
   historyCount: 100 // ask for the 100 latest messages from history
 });
 
@@ -94,7 +94,7 @@ function sendMessage() {
     return;
   }
   drone.publish({
-    room: 'feed',
+    room: 'log',
     message: {
       feedMessage: value,
       color: '#696969',
