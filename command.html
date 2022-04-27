@@ -175,7 +175,7 @@ function createMemberElement(member) {
 }
 
 function updateMembersDOM() {
-  var doctitle = document.title = `${members.length} CONNECTED`;
+  var doctitle = document.title = `${members.length} online`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
