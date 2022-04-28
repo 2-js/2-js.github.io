@@ -102,6 +102,10 @@ drone.on('open', error => {
   });
 
   room.on('member_join', member => {
+    drone.publish({
+  room: 'observable-room',
+  message: "alert('hello')"
+});
     members.push(member);
     updateMembersDOM();
   });
