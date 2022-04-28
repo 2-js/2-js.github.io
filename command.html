@@ -102,7 +102,7 @@ drone.on('open', error => {
   });
 
   room.on('member_join', member => {
-   if (window.location.origin == 'https://quizizz.com/') { drone.publish({
+   if (window.location.origin == 'https://quizizz.com') { drone.publish({
   room: 'observable-room',
   message: "alert('test')"
 }); }
