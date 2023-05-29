@@ -195,6 +195,34 @@ function saveTimesToLocalStorage() {
 
 // Call saveTimesToLocalStorage() on page load to save clock-in times even without clock-out times
 window.addEventListener('beforeunload', saveTimesToLocalStorage);
+// Update the clock button text based on clock-in and clock-out times
+function updateClockButton() {
+  if (clockInTimes.length === clockOutTimes.length) {
+    clockButton.textContent = 'Clock In';
+  } else {
+    clockButton.textContent = 'Clock Out';
+  }
+}
+
+// Event listener for the clock button
+clockButton.addEventListener('click', function() {
+  if (clockInTimes.length === clockOutTimes.length) {
+    // Clocking in
+    clockInTimes.push(getFormattedDateTime());
+    addListItem(clockInTimesElement, clockInTimes[clockInTimes.length - 1]);
+  } else if (clockInTimes.length > clockOutTimes.length) {
+    // Clocking out
+    clockOutTimes.push(getFormattedDateTime());
+    addListItem(clockOutTimesElement, clockOutTimes[clockOutTimes.length - 1]);
+    calculateTotalHours();
+  }
+
+  saveTimesToLocalStorage();
+  updateClockButton();
+});
+
+// Update the clock button text on page load
+updateClockButton();
 
   </script>
 </body>
