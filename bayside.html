@@ -2,6 +2,8 @@
 <html>
 <head>
   <style>
+    /* CSS styles */
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -89,6 +91,21 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
+    // Function to get the formatted current date and time
+    function getFormattedDateTime() {
+      const currentDate = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+      };
+      return currentDate.toLocaleDateString(undefined, options);
+    }
+
     // Function to create a new list item and add it to the specified element
     function addListItem(element, text) {
       const li = document.createElement('li');
@@ -141,12 +158,12 @@
     clockButton.addEventListener('click', function() {
       if (clockInTimes.length === clockOutTimes.length) {
         // Clocking in
-        clockInTimes.push(new Date());
+        clockInTimes.push(getFormattedDateTime());
         addListItem(clockInTimesElement, clockInTimes[clockInTimes.length - 1]);
         clockButton.textContent = 'Clock Out';
       } else if (clockInTimes.length > clockOutTimes.length) {
         // Clocking out
-        clockOutTimes.push(new Date());
+        clockOutTimes.push(getFormattedDateTime());
         addListItem(clockOutTimesElement, clockOutTimes[clockOutTimes.length - 1]);
         clockButton.textContent = 'Clock In';
         calculateTotalHours();
@@ -154,16 +171,16 @@
       }
     });
 
-    // Update the heading with the current date
-    function updateHeading() {
+    // Update the heading and page title with the current date
+    function updatePageTitle() {
       const currentDate = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
       headingElement.textContent = formattedDate;
     }
 
-    // Call the updateHeading function initially
-    updateHeading();
+    // Call the updatePageTitle function initially
+    updatePageTitle();
 
     // Update the clock-in and clock-out times on page load
     updateClockTimes();
