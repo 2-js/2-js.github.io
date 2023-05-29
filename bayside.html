@@ -62,11 +62,11 @@
 
     .button-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       margin-top: 10px;
     }
-    
-    .gap {
+
+    .button-gap {
       margin-top: 10px;
     }
   </style>
@@ -85,7 +85,7 @@
     <p>Total hours worked: <span id="totalHours"></span></p>
     <div class="button-container">
       <button id="clockButton">Clock In</button>
-      <div class="gap"></div>
+      <div class="button-gap"></div>
       <button id="resetButton">Reset</button>
     </div>
   </div>
