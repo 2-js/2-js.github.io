@@ -98,6 +98,9 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
+    // Check if currently clocked in
+    const isClockedIn = clockInTimes.length > clockOutTimes.length;
+
     // Function to create a new list item and add it to the specified element
     function addListItem(element, text) {
       const li = document.createElement('li');
@@ -148,7 +151,7 @@
 
     // Event listener for the clock button
     clockButton.addEventListener('click', function() {
-      if (clockButton.textContent === 'Clock In') {
+      if (!isClockedIn) {
         // Clocking in
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
@@ -158,7 +161,6 @@
         clockInTimes.push(clockInText);
         addListItem(clockInTimesElement, clockInText);
         clockButton.textContent = 'Clock Out';
-        saveTimesToLocalStorage();
       } else {
         // Clocking out
         const currentDate = new Date();
@@ -172,6 +174,9 @@
         calculateTotalHours();
         saveTimesToLocalStorage();
       }
+
+      isClockedIn = !isClockedIn; // Toggle clock-in status
+      saveTimesToLocalStorage();
     });
 
     // Event listener for the reset button
@@ -184,6 +189,7 @@
       clockButton.textContent = 'Clock In';
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
+      isClockedIn = false;
     });
 
     // Update the heading with the current date
