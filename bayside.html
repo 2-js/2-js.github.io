@@ -155,7 +155,7 @@
         const formattedTime = currentDate.toLocaleTimeString();
         const clockInText = `${formattedDate} - ${formattedTime}`;
 
-        clockInTimes.push(new Date());
+        clockInTimes.push(currentDate);
         addListItem(clockInTimesElement, clockInText);
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
@@ -166,7 +166,7 @@
         const formattedTime = currentDate.toLocaleTimeString();
         const clockOutText = `${formattedDate} - ${formattedTime}`;
 
-        clockOutTimes.push(new Date());
+        clockOutTimes.push(currentDate);
         addListItem(clockOutTimesElement, clockOutText);
         clockButton.textContent = 'Clock In';
         calculateTotalHours();
