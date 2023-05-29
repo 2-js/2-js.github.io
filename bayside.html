@@ -158,6 +158,7 @@
         clockInTimes.push(clockInText);
         addListItem(clockInTimesElement, clockInText);
         clockButton.textContent = 'Clock Out';
+        saveTimesToLocalStorage();
       } else if (clockInTimes.length > clockOutTimes.length) {
         // Clocking out
         const currentDate = new Date();
