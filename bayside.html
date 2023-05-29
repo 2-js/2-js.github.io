@@ -187,6 +187,15 @@
 
     // Calculate total hours on page load
     calculateTotalHours();
+    // Function to save clock-in and clock-out times to local storage
+function saveTimesToLocalStorage() {
+  localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
+  localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+}
+
+// Call saveTimesToLocalStorage() on page load to save clock-in times even without clock-out times
+window.addEventListener('beforeunload', saveTimesToLocalStorage);
+
   </script>
 </body>
 </html>
