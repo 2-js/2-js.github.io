@@ -2,64 +2,7 @@
 <html>
 <head>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f2f2f2;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      font-size: 24px;
-      margin: 0;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-    }
-
-    li {
-      margin-bottom: 5px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    p span {
-      font-weight: bold;
-    }
-
-    p.empty {
-      font-style: italic;
-    }
-
-    p.error {
-      color: #ff0000;
-    }
+    /* CSS styles go here */
   </style>
 </head>
 <body>
@@ -144,30 +87,33 @@
       }
 
       saveTimesToLocalStorage();
-      updateClockButton();
     });
 
-    // Function to update the clock button text based on clock-in and clock-out times
-    function updateClockButton() {
-      if (clockInTimes.length === clockOutTimes.length) {
-        clockButton.textContent = 'Clock In';
-      } else {
-        clockButton.textContent = 'Clock Out';
-      }
-    }
-
-    // Update the heading and page title with the current date
-    function updatePageTitle() {
+    // Update the heading with the current date
+    function updateHeading() {
       const currentDate = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
       headingElement.textContent = formattedDate;
     }
 
-    // Call the necessary functions initially
-    updatePageTitle();
+    // Initialize the clock-in and clock-out times on page load
+    function initializeClockTimes() {
+      for (let i = 0; i < clockInTimes.length; i++) {
+        addListItem(clockInTimesElement, clockInTimes[i]);
+      }
+
+      for (let i = 0; i < clockOutTimes.length; i++) {
+        addListItem(clockOutTimesElement, clockOutTimes[i]);
+      }
+    }
+
+    // Calculate total hours on page load
     calculateTotalHours();
-    updateClockButton();
+
+    // Call necessary functions on page load
+    updateHeading();
+    initializeClockTimes();
   </script>
 </body>
 </html>
