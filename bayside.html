@@ -125,8 +125,8 @@
         let totalMilliseconds = 0;
 
         for (let i = 0; i < clockInTimes.length; i++) {
-          const clockOutTime = clockOutTimes[i] ? new Date(clockOutTimes[i]) : new Date(); // Use current time if no clock-out time available
-          const diff = clockOutTime.getTime() - new Date(clockInTimes[i]).getTime();
+          const clockOutTime = clockOutTimes[i] || new Date(); // Use current time if no clock-out time available
+          const diff = clockOutTime - clockInTimes[i];
 
           if (diff > 0) {
             totalMilliseconds += diff;
@@ -150,24 +150,16 @@
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
         // Clocking in
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockInText = `${formattedDate} - ${formattedTime}`;
-
-        clockInTimes.push(clockInText);
-        addListItem(clockInTimesElement, clockInText);
+        const currentDate = new Date().getTime();
+        clockInTimes.push(currentDate);
+        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
       } else {
         // Clocking out
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockOutText = `${formattedDate} - ${formattedTime}`;
-
-        clockOutTimes.push(clockOutText);
-        addListItem(clockOutTimesElement, clockOutText);
+        const currentDate = new Date().getTime();
+        clockOutTimes.push(currentDate);
+        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock In';
         calculateTotalHours();
         saveTimesToLocalStorage();
