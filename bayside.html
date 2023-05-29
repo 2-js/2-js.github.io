@@ -23,7 +23,6 @@
       margin: 0;
       padding-bottom: 10px;
       border-bottom: 1px solid #ccc;
-      text-align: center;
     }
 
     ul {
@@ -37,9 +36,7 @@
     }
 
     button {
-      display: block;
-      width: 100%;
-      padding: 10px;
+      padding: 10px 20px;
       background-color: #4caf50;
       color: #fff;
       border: none;
@@ -52,166 +49,128 @@
       background-color: #45a049;
     }
 
-    p {
-      margin: 10px 0;
-    }
-
-    span {
+    p span {
       font-weight: bold;
     }
 
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
+    p.empty {
+      font-style: italic;
     }
 
-    .button-gap {
-      margin-top: 10px;
+    p.error {
+      color: #ff0000;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 id="heading"></h1>
-    <div>
-      <p>Clock-in times:</p>
-      <ul id="clockInTimes"></ul>
-    </div>
-    <div>
-      <p>Clock-out times:</p>
-      <ul id="clockOutTimes"></ul>
-    </div>
-    <p>Total hours worked: <span id="totalHours"></span></p>
-    <div class="button-container">
-      <button id="clockButton">Clock In</button>
-      <div class="button-gap"></div>
-      <button id="resetButton">Reset</button>
-    </div>
+<div class="container">
+  <h1 id="heading"></h1>
+  <div>
+    <p>Clock-in times:</p>
+    <ul id="clockInTimes"></ul>
   </div>
+  <div>
+    <p>Clock-out times:</p>
+    <ul id="clockOutTimes"></ul>
+  </div>
+  <p>Total hours worked: <span id="totalHours"></span></p>
+  <button id="clockButton">Clock In</button>
+  <button id="resetButton" style="margin-top: 10px;">Reset</button>
+</div>
 
-  <script>
-    // Get the elements
-    const headingElement = document.getElementById('heading');
-    const clockInTimesElement = document.getElementById('clockInTimes');
-    const clockOutTimesElement = document.getElementById('clockOutTimes');
-    const totalHoursElement = document.getElementById('totalHours');
-    const clockButton = document.getElementById('clockButton');
-    const resetButton = document.getElementById('resetButton');
+<script>
+  // Get the elements
+  const headingElement = document.getElementById('heading');
+  const clockInTimesElement = document.getElementById('clockInTimes');
+  const clockOutTimesElement = document.getElementById('clockOutTimes');
+  const totalHoursElement = document.getElementById('totalHours');
+  const clockButton = document.getElementById('clockButton');
+  const resetButton = document.getElementById('resetButton');
 
-    // Initialize clock-in and clock-out times
-    let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
-    let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
+  // Initialize clock-in and clock-out times
+  let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
+  let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
-    // Check if currently clocked in
-    const isClockedIn = clockInTimes.length > clockOutTimes.length;
+  // Function to create a new list item and add it to the specified element
+  function addListItem(element, text) {
+    const li = document.createElement('li');
+    li.textContent = text;
+    element.appendChild(li);
+  }
 
-    // Function to create a new list item and add it to the specified element
-    function addListItem(element, text) {
-      const li = document.createElement('li');
-      li.textContent = text;
-      element.appendChild(li);
+  // Function to update the clock-in and clock-out times on the page
+  function updateClockTimes() {
+    clockInTimesElement.innerHTML = '';
+    clockOutTimesElement.innerHTML = '';
+
+    for (let i = 0; i < clockInTimes.length; i++) {
+      addListItem(clockInTimesElement, clockInTimes[i]);
     }
 
-    // Function to update the clock-in and clock-out times on the page
-    function updateClockTimes() {
-      clockInTimesElement.innerHTML = '';
-      clockOutTimesElement.innerHTML = '';
+    for (let i = 0; i < clockOutTimes.length; i++) {
+      addListItem(clockOutTimesElement, clockOutTimes[i]);
+    }
+  }
 
-      for (let i = 0; i < clockInTimes.length; i++) {
-        addListItem(clockInTimesElement, clockInTimes[i]);
-      }
+  // Function to calculate the total hours worked
+  function calculateTotalHours() {
+    let totalMilliseconds = 0;
 
-      for (let i = 0; i < clockOutTimes.length; i++) {
-        addListItem(clockOutTimesElement, clockOutTimes[i]);
-      }
+    for (let i = 0; i < clockInTimes.length; i++) {
+      const clockOutTime = clockOutTimes[i] || new Date();
+      const diff = clockOutTime - clockInTimes[i];
+      totalMilliseconds += diff;
     }
 
-    // Function to calculate the total hours worked
-    function calculateTotalHours() {
-      if (clockInTimes.length === clockOutTimes.length) {
-        let totalMilliseconds = 0;
+    const totalHours = totalMilliseconds / (1000 * 60 * 60);
+    totalHoursElement.textContent = totalHours.toFixed(2);
+  }
 
-        for (let i = 0; i < clockInTimes.length; i++) {
-          const clockOutTime = clockOutTimes[i] || new Date(); // Use current time if no clock-out time available
-          const diff = clockOutTime - clockInTimes[i];
+  // Function to save clock-in and clock-out times to local storage
+  function saveTimesToLocalStorage() {
+    localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
+    localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+  }
 
-          if (diff > 0) {
-            totalMilliseconds += diff;
-          }
-        }
-
-        const totalHours = totalMilliseconds / (1000 * 60 * 60); // Convert milliseconds to hours
-        totalHoursElement.textContent = totalHours.toFixed(2);
-      } else {
-        totalHoursElement.textContent = '0.00';
-      }
+  // Event listener for the clock button
+  clockButton.addEventListener('click', function() {
+    if (clockInTimes.length === clockOutTimes.length) {
+      // Clocking in
+      clockInTimes.push(new Date().toLocaleString());
+    } else {
+      // Clocking out
+      clockOutTimes.push(new Date().toLocaleString());
     }
 
-    // Function to save clock-in and clock-out times to local storage
-    function saveTimesToLocalStorage() {
-      localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
-      localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
-    }
-
-    // Event listener for the clock button
-    clockButton.addEventListener('click', function() {
-      if (!isClockedIn) {
-        // Clocking in
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockInText = `${formattedDate} - ${formattedTime}`;
-
-        clockInTimes.push(clockInText);
-        addListItem(clockInTimesElement, clockInText);
-        clockButton.textContent = 'Clock Out';
-      } else {
-        // Clocking out
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockOutText = `${formattedDate} - ${formattedTime}`;
-
-        clockOutTimes.push(clockOutText);
-        addListItem(clockOutTimesElement, clockOutText);
-        clockButton.textContent = 'Clock In';
-        calculateTotalHours();
-      }
-
-      isClockedIn = !isClockedIn; // Toggle clock-in status
-      saveTimesToLocalStorage();
-    });
-
-    // Event listener for the reset button
-    resetButton.addEventListener('click', function() {
-      clockInTimes = [];
-      clockOutTimes = [];
-      clockInTimesElement.innerHTML = '';
-      clockOutTimesElement.innerHTML = '';
-      totalHoursElement.textContent = '0.00';
-      clockButton.textContent = 'Clock In';
-      localStorage.removeItem('clockInTimes');
-      localStorage.removeItem('clockOutTimes');
-      isClockedIn = false;
-    });
-
-    // Update the heading with the current date
-    function updateHeading() {
-      const currentDate = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const formattedDate = currentDate.toLocaleDateString(undefined, options);
-      headingElement.textContent = formattedDate;
-    }
-
-    // Call the updateHeading function initially
-    updateHeading();
-
-    // Update the clock-in and clock-out times on page load
     updateClockTimes();
+    saveTimesToLocalStorage();
+  });
 
-    // Calculate total hours on page load
-    calculateTotalHours();
-  </script>
+  // Event listener for the reset button
+  resetButton.addEventListener('click', function() {
+    clockInTimes = [];
+    clockOutTimes = [];
+    updateClockTimes();
+    saveTimesToLocalStorage();
+  });
+
+  // Update the heading and page title with the current date
+  function updatePageTitle() {
+    const currentDate = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = currentDate.toLocaleDateString(undefined, options);
+    headingElement.textContent = formattedDate;
+  }
+
+  // Call the updatePageTitle function initially
+  updatePageTitle();
+
+  // Update the clock-in and clock-out times on page load
+  updateClockTimes();
+
+  // Calculate total hours on page load
+  calculateTotalHours();
+</script>
+
 </body>
 </html>
