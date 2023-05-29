@@ -148,7 +148,7 @@
 
     // Event listener for the clock button
     clockButton.addEventListener('click', function() {
-      if (clockInTimes.length === clockOutTimes.length) {
+      if (clockButton.textContent === 'Clock In') {
         // Clocking in
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
@@ -159,7 +159,7 @@
         addListItem(clockInTimesElement, clockInText);
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
-      } else if (clockInTimes.length > clockOutTimes.length) {
+      } else {
         // Clocking out
         const currentDate = new Date();
         const formattedDate = currentDate.toLocaleDateString();
