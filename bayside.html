@@ -161,7 +161,7 @@
         // Clocking out
         const currentDate = new Date();
         const formattedTime = currentDate.toLocaleTimeString();
-        const clockOutText = `Clock Out: ${formattedTime}`;
+        const clockOutText = `${formattedDate} - ${formattedTime}`;
 
         clockOutTimes.push(clockOutText);
         addListItem(clockOutTimesElement, clockOutText);
@@ -178,20 +178,21 @@
       clockInTimesElement.innerHTML = '';
       clockOutTimesElement.innerHTML = '';
       totalHoursElement.textContent = '0.00';
+      clockButton.textContent = 'Clock In';
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
     });
 
-    // Update the heading and page title with the current date
-    function updatePageTitle() {
+    // Update the heading with the current date
+    function updateHeading() {
       const currentDate = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       const formattedDate = currentDate.toLocaleDateString(undefined, options);
       headingElement.textContent = formattedDate;
     }
 
-    // Call the updatePageTitle function initially
-    updatePageTitle();
+    // Call the updateHeading function initially
+    updateHeading();
 
     // Update the clock-in and clock-out times on page load
     updateClockTimes();
