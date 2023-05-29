@@ -63,6 +63,7 @@
     .button-container {
       display: flex;
       justify-content: space-between;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -154,7 +155,7 @@
         const formattedTime = currentDate.toLocaleTimeString();
         const clockInText = `${formattedDate} - ${formattedTime}`;
 
-        clockInTimes.push(currentDate);
+        clockInTimes.push(clockInText);
         addListItem(clockInTimesElement, clockInText);
         clockButton.textContent = 'Clock Out';
       } else if (clockInTimes.length > clockOutTimes.length) {
@@ -164,7 +165,7 @@
         const formattedTime = currentDate.toLocaleTimeString();
         const clockOutText = `${formattedDate} - ${formattedTime}`;
 
-        clockOutTimes.push(currentDate);
+        clockOutTimes.push(clockOutText);
         addListItem(clockOutTimesElement, clockOutText);
         clockButton.textContent = 'Clock In';
         calculateTotalHours();
