@@ -202,6 +202,11 @@
 
     // Calculate total hours on page load
     calculateTotalHours();
+
+    // Check the last clock-in/clock-out status and update the clock button's text
+    if (clockInTimes.length > clockOutTimes.length) {
+      clockButton.textContent = 'Clock Out';
+    }
   </script>
 </body>
 </html>
