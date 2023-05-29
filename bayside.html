@@ -2,8 +2,6 @@
 <html>
 <head>
   <style>
-    /* CSS styles */
-
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -91,40 +89,11 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
-    // Function to get the formatted current date and time
-    function getFormattedDateTime() {
-      const currentDate = new Date();
-      const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-      };
-      return currentDate.toLocaleDateString(undefined, options);
-    }
-
     // Function to create a new list item and add it to the specified element
     function addListItem(element, text) {
       const li = document.createElement('li');
       li.textContent = text;
       element.appendChild(li);
-    }
-
-    // Function to update the clock-in and clock-out times on the page
-    function updateClockTimes() {
-      clockInTimesElement.innerHTML = '';
-      clockOutTimesElement.innerHTML = '';
-
-      for (let i = 0; i < clockInTimes.length; i++) {
-        addListItem(clockInTimesElement, clockInTimes[i]);
-      }
-
-      for (let i = 0; i < clockOutTimes.length; i++) {
-        addListItem(clockOutTimesElement, clockOutTimes[i]);
-      }
     }
 
     // Function to calculate the total hours worked
@@ -154,22 +123,38 @@
       localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
     }
 
+    // Function to get the current date and time in the desired format
+    function getFormattedDateTime() {
+      const currentDate = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+      return currentDate.toLocaleDateString(undefined, options);
+    }
+
     // Event listener for the clock button
     clockButton.addEventListener('click', function() {
       if (clockInTimes.length === clockOutTimes.length) {
         // Clocking in
         clockInTimes.push(getFormattedDateTime());
         addListItem(clockInTimesElement, clockInTimes[clockInTimes.length - 1]);
-        clockButton.textContent = 'Clock Out';
       } else if (clockInTimes.length > clockOutTimes.length) {
         // Clocking out
         clockOutTimes.push(getFormattedDateTime());
         addListItem(clockOutTimesElement, clockOutTimes[clockOutTimes.length - 1]);
-        clockButton.textContent = 'Clock In';
         calculateTotalHours();
-        saveTimesToLocalStorage();
       }
+
+      saveTimesToLocalStorage();
+      updateClockButton();
     });
+
+    // Function to update the clock button text based on clock-in and clock-out times
+    function updateClockButton() {
+      if (clockInTimes.length === clockOutTimes.length) {
+        clockButton.textContent = 'Clock In';
+      } else {
+        clockButton.textContent = 'Clock Out';
+      }
+    }
 
     // Update the heading and page title with the current date
     function updatePageTitle() {
@@ -179,51 +164,10 @@
       headingElement.textContent = formattedDate;
     }
 
-    // Call the updatePageTitle function initially
+    // Call the necessary functions initially
     updatePageTitle();
-
-    // Update the clock-in and clock-out times on page load
-    updateClockTimes();
-
-    // Calculate total hours on page load
     calculateTotalHours();
-    // Function to save clock-in and clock-out times to local storage
-function saveTimesToLocalStorage() {
-  localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
-  localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
-}
-
-// Call saveTimesToLocalStorage() on page load to save clock-in times even without clock-out times
-window.addEventListener('beforeunload', saveTimesToLocalStorage);
-// Update the clock button text based on clock-in and clock-out times
-function updateClockButton() {
-  if (clockInTimes.length === clockOutTimes.length) {
-    clockButton.textContent = 'Clock In';
-  } else {
-    clockButton.textContent = 'Clock Out';
-  }
-}
-
-// Event listener for the clock button
-clockButton.addEventListener('click', function() {
-  if (clockInTimes.length === clockOutTimes.length) {
-    // Clocking in
-    clockInTimes.push(getFormattedDateTime());
-    addListItem(clockInTimesElement, clockInTimes[clockInTimes.length - 1]);
-  } else if (clockInTimes.length > clockOutTimes.length) {
-    // Clocking out
-    clockOutTimes.push(getFormattedDateTime());
-    addListItem(clockOutTimesElement, clockOutTimes[clockOutTimes.length - 1]);
-    calculateTotalHours();
-  }
-
-  saveTimesToLocalStorage();
-  updateClockButton();
-});
-
-// Update the clock button text on page load
-updateClockButton();
-
+    updateClockButton();
   </script>
 </body>
 </html>
