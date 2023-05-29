@@ -63,7 +63,7 @@
     .button-container {
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -146,39 +146,31 @@
       localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
     }
 
-    // Function to handle clock-in action
-    function handleClockIn() {
-      const currentDate = new Date();
-      const formattedDate = currentDate.toLocaleDateString();
-      const formattedTime = currentDate.toLocaleTimeString();
-      const clockInText = `${formattedDate} - ${formattedTime}`;
-
-      clockInTimes.push(clockInText);
-      addListItem(clockInTimesElement, clockInText);
-      clockButton.textContent = 'Clock Out';
-      saveTimesToLocalStorage();
-    }
-
-    // Function to handle clock-out action
-    function handleClockOut() {
-      const currentDate = new Date();
-      const formattedDate = currentDate.toLocaleDateString();
-      const formattedTime = currentDate.toLocaleTimeString();
-      const clockOutText = `${formattedDate} - ${formattedTime}`;
-
-      clockOutTimes.push(clockOutText);
-      addListItem(clockOutTimesElement, clockOutText);
-      clockButton.textContent = 'Clock In';
-      calculateTotalHours();
-      saveTimesToLocalStorage();
-    }
-
     // Event listener for the clock button
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
-        handleClockIn();
+        // Clocking in
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = currentDate.toLocaleTimeString();
+        const clockInText = `${formattedDate} - ${formattedTime}`;
+
+        clockInTimes.push(clockInText);
+        addListItem(clockInTimesElement, clockInText);
+        clockButton.textContent = 'Clock Out';
+        saveTimesToLocalStorage();
       } else {
-        handleClockOut();
+        // Clocking out
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = currentDate.toLocaleTimeString();
+        const clockOutText = `${formattedDate} - ${formattedTime}`;
+
+        clockOutTimes.push(clockOutText);
+        addListItem(clockOutTimesElement, clockOutText);
+        clockButton.textContent = 'Clock In';
+        calculateTotalHours();
+        saveTimesToLocalStorage();
       }
     });
 
