@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -65,22 +64,6 @@
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
-    }
-
-    /* Add responsive styles here */
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-
-      .container {
-        max-width: 100%;
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
     }
   </style>
 </head>
@@ -159,23 +142,38 @@
       localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
     }
 
+    function calculateTotalTime() {
+      totalMilliseconds = 0;
+      const len = Math.min(clockInTimes.length, clockOutTimes.length);
+
+      for (let i = 0; i < len; i++) {
+        const clockInTime = new Date(clockInTimes[i]).getTime();
+        const clockOutTime = new Date(clockOutTimes[i]).getTime();
+        const elapsedTime = clockOutTime - clockInTime;
+        totalMilliseconds += elapsedTime;
+      }
+
+      updateTotalTime();
+    }
+
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
-        const currentDate = new Date().getTime();
-        clockInTimes.push(new Date(currentDate).toLocaleString());
-        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
+        const currentDate = new Date().toLocaleString();
+        clockInTimes.push(currentDate);
+        addListItem(clockInTimesElement, currentDate);
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
         localStorage.setItem('lastClockInTimestamp', currentDate);
         startTimer();
       } else {
-        const currentDate = new Date().getTime();
-        clockOutTimes.push(new Date(currentDate).toLocaleString());
-        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
+        const currentDate = new Date().toLocaleString();
+        clockOutTimes.push(currentDate);
+        addListItem(clockOutTimesElement, currentDate);
         clockButton.textContent = 'Clock In';
         saveTimesToLocalStorage();
         localStorage.removeItem('lastClockInTimestamp');
         stopTimer();
+        calculateTotalTime();
       }
     });
 
