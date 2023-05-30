@@ -212,20 +212,16 @@
 
     // Check if the page was closed and reopened
     const lastClosedTimestamp = localStorage.getItem('lastClosedTimestamp');
-    if (lastClosedTimestamp) {
-      const elapsedMilliseconds = new Date().getTime() - parseInt(lastClosedTimestamp);
-      totalMilliseconds += elapsedMilliseconds;
-      updateTotalTime();
-      if (clockInTimes.length > clockOutTimes.length) {
-        // If clocked in, restart the timer
-        startTimer();
-      }
-      localStorage.removeItem('lastClosedTimestamp');
+    if (lastClosedTimestamp && clockInTimes.length > clockOutTimes.length) {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - lastClosedTimestamp;
+      totalMilliseconds += elapsedTime;
+      startTimer();
     }
 
-    // Save the timestamp when the page is being closed
+    // Save the timestamp when the page is closed
     window.addEventListener('beforeunload', function() {
-      localStorage.setItem('lastClosedTimestamp', new Date().getTime().toString());
+      localStorage.setItem('lastClosedTimestamp', new Date().getTime());
     });
   </script>
 </body>
