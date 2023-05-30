@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -16,10 +17,6 @@
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .container.inactive {
-      background-color: #f2f2f2;
     }
 
     h1 {
@@ -69,10 +66,27 @@
       justify-content: space-between;
       margin-top: 20px;
     }
+
+    /* iPhone-specific styles */
+    @media (max-width: 480px) {
+      .container {
+        max-width: 100%;
+        padding: 10px;
+      }
+
+      .button-container {
+        flex-direction: column;
+      }
+
+      button {
+        width: auto;
+        margin-bottom: 10px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container active" id="mainContainer">
+  <div class="container">
     <h1 id="heading"></h1>
     <div>
       <p>Clock-in times:</p>
@@ -90,7 +104,6 @@
   </div>
 
   <script>
-    const mainContainer = document.getElementById('mainContainer');
     const headingElement = document.getElementById('heading');
     const clockInTimesElement = document.getElementById('clockInTimes');
     const clockOutTimesElement = document.getElementById('clockOutTimes');
@@ -101,7 +114,6 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
     let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
-    let lastClockInTimestamp = parseInt(localStorage.getItem('lastClockInTimestamp')) || 0;
     let timerInterval;
 
     function addListItem(element, text) {
@@ -154,7 +166,6 @@
         addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
-        localStorage.setItem('lastClockInTimestamp', currentDate);
         startTimer();
       } else {
         const currentDate = new Date().getTime();
@@ -162,7 +173,6 @@
         addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock In';
         saveTimesToLocalStorage();
-        localStorage.removeItem('lastClockInTimestamp');
         stopTimer();
       }
     });
@@ -178,7 +188,6 @@
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
       localStorage.removeItem('totalMilliseconds');
-      localStorage.removeItem('lastClockInTimestamp');
       stopTimer();
     });
 
@@ -195,43 +204,17 @@
 
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
-      const currentTime = new Date().getTime();
-      const elapsedTime = currentTime - lastClockInTimestamp;
-      totalMilliseconds += elapsedTime;
       startTimer();
     }
 
-    function createNewDayContainer() {
-      const newContainer = mainContainer.cloneNode(true);
-      newContainer.classList.remove('active');
-      mainContainer.parentNode.appendChild(newContainer);
-      const newHeading = newContainer.querySelector('h1');
-      newHeading.textContent = '';
-      const newClockInTimes = newContainer.querySelector('#clockInTimes');
-      newClockInTimes.innerHTML = '';
-      const newClockOutTimes = newContainer.querySelector('#clockOutTimes');
-      newClockOutTimes.innerHTML = '';
-      const newTotalTime = newContainer.querySelector('#totalTime');
-      newTotalTime.textContent = '00:00:00';
-      const newClockButton = newContainer.querySelector('#clockButton');
-      newClockButton.textContent = 'Clock In';
-      const newResetButton = newContainer.querySelector('#resetButton');
-      newResetButton.style.display = 'none';
+    // Additional code to handle iPhone specific issues
+    function isIPhone() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
 
-    function checkNewDay() {
-      const currentDate = new Date();
-      const currentDay = currentDate.getDate();
-      const storedDate = localStorage.getItem('currentDay');
-      if (storedDate && storedDate !== currentDay.toString()) {
-        localStorage.setItem('currentDay', currentDay);
-        createNewDayContainer();
-      } else if (!storedDate) {
-        localStorage.setItem('currentDay', currentDay);
-      }
+    if (isIPhone()) {
+      document.body.classList.add('iphone');
     }
-
-    checkNewDay();
   </script>
 </body>
 </html>
