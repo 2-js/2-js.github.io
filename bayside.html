@@ -98,9 +98,8 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
-    // Initialize total time and start time
-    let totalTime = 0;
-    let startTime = 0;
+    // Initialize total time variables
+    let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
     let timerInterval;
 
     // Function to create a new list item and add it to the specified element
@@ -126,39 +125,18 @@
 
     // Function to update the total time worked
     function updateTotalTime() {
-      let totalSeconds = Math.floor(totalTime / 1000);
-      let hours = Math.floor(totalSeconds / 3600);
-      let minutes = Math.floor((totalSeconds % 3600) / 60);
-      let seconds = totalSeconds % 60;
-
-      let timeString = `${padNumber(hours)}:${padNumber(minutes)}:${padNumber(seconds)}`;
-      totalTimeElement.textContent = timeString;
-    }
-
-    // Function to pad a number with leading zeros
-    function padNumber(number) {
-      return number.toString().padStart(2, '0');
-    }
-
-    // Function to save clock-in and clock-out times to local storage
-    function saveTimesToLocalStorage() {
-      localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
-      localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
-    }
-
-    // Function to save total time and start time to local storage
-    function saveTimeToLocalStorage() {
-      localStorage.setItem('totalTime', totalTime);
-      localStorage.setItem('startTime', startTime);
+      const hours = Math.floor(totalMilliseconds / (1000 * 60 * 60)).toString().padStart(2, '0');
+      const minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60).toString().padStart(2, '0');
+      const seconds = Math.floor((totalMilliseconds / 1000) % 60).toString().padStart(2, '0');
+      totalTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
     }
 
     // Function to start the timer
     function startTimer() {
-      startTime = Date.now() - totalTime;
-
-      timerInterval = setInterval(() => {
-        totalTime = Date.now() - startTime;
+      timerInterval = setInterval(function() {
+        totalMilliseconds += 1000;
         updateTotalTime();
+        localStorage.setItem('totalMilliseconds', totalMilliseconds);
       }, 1000);
     }
 
@@ -167,42 +145,30 @@
       clearInterval(timerInterval);
     }
 
+    // Function to save clock-in and clock-out times to local storage
+    function saveTimesToLocalStorage() {
+      localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
+      localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+    }
+
     // Event listener for the clock button
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
         // Clocking in
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockInText = `${formattedDate} - ${formattedTime}`;
-
-        clockInTimes.push(clockInText);
-        addListItem(clockInTimesElement, clockInText);
+        const currentDate = new Date().getTime();
+        clockInTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
-
-        // Resume timer if previously started
-        if (timerInterval) {
-          startTimer();
-        } else {
-          // Start timer
-          startTimer();
-          saveTimeToLocalStorage();
-        }
+        startTimer();
       } else {
         // Clocking out
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
-        const formattedTime = currentDate.toLocaleTimeString();
-        const clockOutText = `${formattedDate} - ${formattedTime}`;
-
-        clockOutTimes.push(clockOutText);
-        addListItem(clockOutTimesElement, clockOutText);
+        const currentDate = new Date().getTime();
+        clockOutTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock In';
-        stopTimer();
-        calculateTotalTime();
         saveTimesToLocalStorage();
-        saveTimeToLocalStorage();
+        stopTimer();
       }
     });
 
@@ -212,14 +178,13 @@
       clockOutTimes = [];
       clockInTimesElement.innerHTML = '';
       clockOutTimesElement.innerHTML = '';
-      totalTime = 0;
-      totalTimeElement.textContent = '00:00:00';
+      totalMilliseconds = 0;
+      updateTotalTime();
       clockButton.textContent = 'Clock In';
-      stopTimer();
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
-      localStorage.removeItem('totalTime');
-      localStorage.removeItem('startTime');
+      localStorage.removeItem('totalMilliseconds');
+      stopTimer();
     });
 
     // Update the heading with the current date
@@ -236,31 +201,13 @@
     // Update the clock-in and clock-out times on page load
     updateClockTimes();
 
-    // Calculate total time on page load
-    calculateTotalTime();
+    // Calculate total hours on page load
+    updateTotalTime();
 
     // Check the last clock-in/clock-out status and update the clock button's text
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
       startTimer();
-    } else {
-      const storedTotalTime = localStorage.getItem('totalTime');
-      const storedStartTime = localStorage.getItem('startTime');
-
-      if (storedTotalTime && storedStartTime) {
-        totalTime = parseInt(storedTotalTime);
-        startTime = parseInt(storedStartTime);
-
-        if (!isNaN(totalTime) && !isNaN(startTime)) {
-          updateTotalTime();
-
-          if (clockOutTimes.length === clockInTimes.length) {
-            stopTimer();
-          } else {
-            startTimer();
-          }
-        }
-      }
     }
   </script>
 </body>
