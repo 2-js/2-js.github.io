@@ -199,11 +199,13 @@
       }
     }
 
-    window.addEventListener('beforeunload', function() {
+    window.addEventListener('beforeunload', function(event) {
       if (clockInTimes.length > clockOutTimes.length) {
-        localStorage.setItem('lastClockInTimestamp', new Date().getTime());
-      } else {
-        localStorage.removeItem('lastClockInTimestamp');
+        const currentTime = new Date().getTime();
+        const elapsedTime = currentTime - lastClockInTimestamp;
+        totalMilliseconds += elapsedTime;
+        localStorage.setItem('lastClockInTimestamp', currentTime);
+        localStorage.setItem('totalMilliseconds', totalMilliseconds);
       }
     });
 
