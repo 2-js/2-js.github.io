@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .container.inactive {
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    span {
+      font-weight: bold;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container active" id="mainContainer">
+    <h1 id="heading"></h1>
+    <div>
+      <p>Clock-in times:</p>
+      <ul id="clockInTimes"></ul>
+    </div>
+    <div>
+      <p>Clock-out times:</p>
+      <ul id="clockOutTimes"></ul>
+    </div>
+    <p>Total time worked: <span id="totalTime">00:00:00</span></p>
+    <div class="button-container">
+      <button id="clockButton">Clock In</button>
+      <button id="resetButton">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    const mainContainer = document.getElementById('mainContainer');
+    const headingElement = document.getElementById('heading');
+    const clockInTimesElement = document.getElementById('clockInTimes');
+    const clockOutTimesElement = document.getElementById('clockOutTimes');
+    const totalTimeElement = document.getElementById('totalTime');
+    const clockButton = document.getElementById('clockButton');
+    const resetButton = document.getElementById('resetButton');
+
+    let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
+    let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
+    let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
+    let lastClockInTimestamp = parseInt(localStorage.getItem('lastClockInTimestamp')) || 0;
+    let timerInterval;
+
+    function addListItem(element, text) {
+      const li = document.createElement('li');
+      li.textContent = text;
+      element.appendChild(li);
+    }
+
+    function updateClockTimes() {
+      clockInTimesElement.innerHTML = '';
+      clockOutTimesElement.innerHTML = '';
+
+      for (let i = 0; i < clockInTimes.length; i++) {
+        addListItem(clockInTimesElement, clockInTimes[i]);
+      }
+
+      for (let i = 0; i < clockOutTimes.length; i++) {
+        addListItem(clockOutTimesElement, clockOutTimes[i]);
+      }
+    }
+
+    function updateTotalTime() {
+      const hours = Math.floor(totalMilliseconds / (1000 * 60 * 60)).toString().padStart(2, '0');
+      const minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60).toString().padStart(2, '0');
+      const seconds = Math.floor((totalMilliseconds / 1000) % 60).toString().padStart(2, '0');
+      totalTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    function startTimer() {
+      timerInterval = setInterval(function() {
+        totalMilliseconds += 1000;
+        updateTotalTime();
+        localStorage.setItem('totalMilliseconds', totalMilliseconds);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function saveTimesToLocalStorage() {
+      localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
+      localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+    }
+
+    clockButton.addEventListener('click', function() {
+      if (clockButton.textContent === 'Clock In') {
+        const currentDate = new Date().getTime();
+        clockInTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
+        clockButton.textContent = 'Clock Out';
+        saveTimesToLocalStorage();
+        localStorage.setItem('lastClockInTimestamp', currentDate);
+        startTimer();
+      } else {
+        const currentDate = new Date().getTime();
+        clockOutTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
+        clockButton.textContent = 'Clock In';
+        saveTimesToLocalStorage();
+        localStorage.removeItem('lastClockInTimestamp');
+        stopTimer();
+      }
+    });
+
+    resetButton.addEventListener('click', function() {
+      clockInTimes = [];
+      clockOutTimes = [];
+      clockInTimesElement.innerHTML = '';
+      clockOutTimesElement.innerHTML = '';
+      totalMilliseconds = 0;
+      updateTotalTime();
+      clockButton.textContent = 'Clock In';
+      localStorage.removeItem('clockInTimes');
+      localStorage.removeItem('clockOutTimes');
+      localStorage.removeItem('totalMilliseconds');
+      localStorage.removeItem('lastClockInTimestamp');
+      stopTimer();
+    });
+
+    function updateHeading() {
+      const currentDate = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = currentDate.toLocaleDateString(undefined, options);
+      headingElement.textContent = formattedDate;
+    }
+
+    updateHeading();
+    updateClockTimes();
+    updateTotalTime();
+
+    if (clockInTimes.length > clockOutTimes.length) {
+      clockButton.textContent = 'Clock Out';
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - lastClockInTimestamp;
+      totalMilliseconds += elapsedTime;
+      startTimer();
+    }
+
+    function createNewDayContainer() {
+      const newContainer = mainContainer.cloneNode(true);
+      newContainer.classList.remove('active');
+      mainContainer.parentNode.appendChild(newContainer);
+      const newHeading = newContainer.querySelector('h1');
+      newHeading.textContent = '';
+      const newClockInTimes = newContainer.querySelector('#clockInTimes');
+      newClockInTimes.innerHTML = '';
+      const newClockOutTimes = newContainer.querySelector('#clockOutTimes');
+      newClockOutTimes.innerHTML = '';
+      const newTotalTime = newContainer.querySelector('#totalTime');
+      newTotalTime.textContent = '00:00:00';
+      const newClockButton = newContainer.querySelector('#clockButton');
+      newClockButton.textContent = 'Clock In';
+      const newResetButton = newContainer.querySelector('#resetButton');
+      newResetButton.style.display = 'none';
+    }
+
+    function checkNewDay() {
+      const currentDate = new Date();
+      const currentDay = currentDate.getDate();
+      const storedDate = localStorage.getItem('currentDay');
+      if (storedDate && storedDate !== currentDay.toString()) {
+        localStorage.setItem('currentDay', currentDay);
+        createNewDayContainer();
+      } else if (!storedDate) {
+        localStorage.setItem('currentDay', currentDay);
+      }
+    }
+
+    checkNewDay();
+  </script>
+</body>
+</html>
