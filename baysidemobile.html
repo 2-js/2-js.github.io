@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -86,7 +87,7 @@
   </div>
 
   <script>
-        const headingElement = document.getElementById('heading');
+    const headingElement = document.getElementById('heading');
     const clockInTimesElement = document.getElementById('clockInTimes');
     const clockOutTimesElement = document.getElementById('clockOutTimes');
     const totalTimeElement = document.getElementById('totalTime');
@@ -96,7 +97,7 @@
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
     let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
-    let initialTime = parseInt(localStorage.getItem('initialTime')) || 0;
+    let lastClockInTimestamp = parseInt(localStorage.getItem('lastClockInTimestamp')) || 0;
     let timerInterval;
 
     function addListItem(element, text) {
@@ -144,25 +145,20 @@
 
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
+        const currentDate = new Date().getTime();
+        clockInTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
-        const currentDate = new Date().toLocaleString();
-        clockInTimes.push(currentDate);
-        addListItem(clockInTimesElement, currentDate);
-        localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
-
-        const storedInitialTime = parseInt(localStorage.getItem('initialTime'));
-        const elapsedTime = new Date().getTime() - storedInitialTime;
-        totalMilliseconds += elapsedTime;
-        localStorage.setItem('totalMilliseconds', totalMilliseconds);
-
+        saveTimesToLocalStorage();
+        localStorage.setItem('lastClockInTimestamp', currentDate);
         startTimer();
       } else {
+        const currentDate = new Date().getTime();
+        clockOutTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock In';
-        const currentDate = new Date().toLocaleString();
-        clockOutTimes.push(currentDate);
-        addListItem(clockOutTimesElement, currentDate);
-        localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
-
+        saveTimesToLocalStorage();
+        localStorage.removeItem('lastClockInTimestamp');
         stopTimer();
       }
     });
@@ -170,12 +166,15 @@
     resetButton.addEventListener('click', function() {
       clockInTimes = [];
       clockOutTimes = [];
+      clockInTimesElement.innerHTML = '';
+      clockOutTimesElement.innerHTML = '';
       totalMilliseconds = 0;
       updateTotalTime();
       clockButton.textContent = 'Clock In';
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
       localStorage.removeItem('totalMilliseconds');
+      localStorage.removeItem('lastClockInTimestamp');
       stopTimer();
     });
 
@@ -186,32 +185,25 @@
       headingElement.textContent = formattedDate;
     }
 
-    function checkClockStatus() {
-      const storedClockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
-      const storedClockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
-
-      if (storedClockInTimes.length > storedClockOutTimes.length) {
-        clockButton.textContent = 'Clock Out';
-        startTimer();
-      }
-    }
-
-    function checkNewDay() {
-      const storedDate = localStorage.getItem('storedDate');
-      const currentDate = new Date().toLocaleDateString();
-
-      if (storedDate !== currentDate) {
-        localStorage.setItem('storedDate', currentDate);
-        resetButton.click();
-      }
-    }
-
     updateHeading();
     updateClockTimes();
     updateTotalTime();
-    checkClockStatus();
-    checkNewDay();
+
+    if (clockInTimes.length > clockOutTimes.length) {
+      clockButton.textContent = 'Clock Out';
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - lastClockInTimestamp;
+      totalMilliseconds += elapsedTime;
+      startTimer();
+    }
+
+    window.addEventListener('beforeunload', function() {
+      if (clockInTimes.length > clockOutTimes.length) {
+        localStorage.setItem('lastClockInTimestamp', new Date().getTime());
+      } else {
+        localStorage.removeItem('lastClockInTimestamp');
+      }
+    });
   </script>
 </body>
 </html>
-
