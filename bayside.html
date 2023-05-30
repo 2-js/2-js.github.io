@@ -99,7 +99,7 @@
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
     // Initialize total time variables
-    let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
+    let totalMilliseconds = JSON.parse(localStorage.getItem('totalMilliseconds')) || 0;
     let timerInterval;
 
     // Function to create a new list item and add it to the specified element
@@ -136,7 +136,6 @@
       timerInterval = setInterval(function() {
         totalMilliseconds += 1000;
         updateTotalTime();
-        localStorage.setItem('totalMilliseconds', totalMilliseconds.toString());
       }, 1000);
     }
 
@@ -149,6 +148,22 @@
     function saveTimesToLocalStorage() {
       localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
       localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+    }
+
+    // Function to save total milliseconds to local storage
+    function saveTotalMillisecondsToLocalStorage() {
+      localStorage.setItem('totalMilliseconds', JSON.stringify(totalMilliseconds));
+    }
+
+    // Function to calculate the elapsed time when the page loads or is refreshed
+    function calculateElapsedTime() {
+      if (clockInTimes.length > clockOutTimes.length) {
+        const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
+        const currentTimestamp = new Date().getTime();
+        const elapsedTime = currentTimestamp - lastClockInTime;
+        totalMilliseconds += elapsedTime;
+        saveTotalMillisecondsToLocalStorage();
+      }
     }
 
     // Event listener for the clock button
@@ -195,18 +210,6 @@
       headingElement.textContent = formattedDate;
     }
 
-    // Calculate the elapsed time when the page loads or is refreshed
-    function calculateElapsedTime() {
-      if (clockInTimes.length > clockOutTimes.length) {
-        const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
-        const currentTime = new Date().getTime();
-        const elapsedMilliseconds = currentTime - lastClockInTime;
-        totalMilliseconds += elapsedMilliseconds;
-        updateTotalTime();
-        startTimer();
-      }
-    }
-
     // Call the updateHeading function initially
     updateHeading();
 
@@ -216,14 +219,14 @@
     // Calculate total hours on page load
     updateTotalTime();
 
+    // Calculate elapsed time when the page loads or is refreshed
+    calculateElapsedTime();
+
     // Check the last clock-in/clock-out status and update the clock button's text
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
       startTimer();
     }
-
-    // Calculate elapsed time when the page loads or is refreshed
-    calculateElapsedTime();
   </script>
 </body>
 </html>
