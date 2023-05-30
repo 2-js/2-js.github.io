@@ -145,18 +145,28 @@
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
         clockButton.textContent = 'Clock Out';
-        const currentDate = new Date().getTime();
-        initialTime = parseInt(localStorage.getItem('initialTime')) || currentDate;
-        localStorage.setItem('initialTime', initialTime);
+        const currentDate = new Date().toLocaleString();
+        clockInTimes.push(currentDate);
+        addListItem(clockInTimesElement, currentDate);
+        localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
+
+        const storedInitialTime = parseInt(localStorage.getItem('initialTime'));
+        if (!storedInitialTime) {
+          initialTime = new Date().getTime();
+          localStorage.setItem('initialTime', initialTime);
+        }
         startTimer();
       } else {
         clockButton.textContent = 'Clock In';
-        const currentDate = new Date().getTime();
-        const timeElapsed = currentDate - initialTime;
+        const currentDate = new Date().toLocaleString();
+        clockOutTimes.push(currentDate);
+        addListItem(clockOutTimesElement, currentDate);
+        localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
+
+        const currentDateMillis = new Date().getTime();
+        const timeElapsed = currentDateMillis - initialTime;
         totalMilliseconds += timeElapsed;
         initialTime = 0;
-        clockOutTimes.push(new Date(currentDate).toLocaleString());
-        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         stopTimer();
         saveTimesToLocalStorage();
         localStorage.setItem('totalMilliseconds', totalMilliseconds);
@@ -193,9 +203,13 @@
 
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
-      const currentDate = new Date().getTime();
-      initialTime = parseInt(localStorage.getItem('initialTime')) || currentDate;
-      startTimer();
+      const storedInitialTime = parseInt(localStorage.getItem('initialTime'));
+      if (!storedInitialTime) {
+        initialTime = new Date().getTime();
+        localStorage.setItem('initialTime', initialTime);
+      } else {
+        startTimer();
+      }
     }
   </script>
 </body>
