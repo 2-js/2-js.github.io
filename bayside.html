@@ -209,6 +209,24 @@
       clockButton.textContent = 'Clock Out';
       startTimer();
     }
+
+    // Check if the page was closed and reopened
+    const lastClosedTimestamp = localStorage.getItem('lastClosedTimestamp');
+    if (lastClosedTimestamp) {
+      const elapsedMilliseconds = new Date().getTime() - parseInt(lastClosedTimestamp);
+      totalMilliseconds += elapsedMilliseconds;
+      updateTotalTime();
+      if (clockInTimes.length > clockOutTimes.length) {
+        // If clocked in, restart the timer
+        startTimer();
+      }
+      localStorage.removeItem('lastClosedTimestamp');
+    }
+
+    // Save the timestamp when the page is being closed
+    window.addEventListener('beforeunload', function() {
+      localStorage.setItem('lastClosedTimestamp', new Date().getTime().toString());
+    });
   </script>
 </body>
 </html>
