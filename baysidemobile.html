@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -66,11 +65,6 @@
       justify-content: space-between;
       margin-top: 20px;
     }
-
-    /* Additional iPhone specific styles */
-    .iphone .container {
-      opacity: 0.7;
-    }
   </style>
 </head>
 <body>
@@ -125,14 +119,10 @@
     }
 
     function updateTotalTime() {
-      const milliseconds = totalMilliseconds % 1000;
-      const seconds = Math.floor((totalMilliseconds / 1000) % 60);
-      const minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60);
-      const hours = Math.floor((totalMilliseconds / (1000 * 60 * 60)) % 24);
-
-      totalTimeElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes
-        .toString()
-        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      const hours = Math.floor(totalMilliseconds / (1000 * 60 * 60)).toString().padStart(2, '0');
+      const minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60).toString().padStart(2, '0');
+      const seconds = Math.floor((totalMilliseconds / 1000) % 60).toString().padStart(2, '0');
+      totalTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
     }
 
     function startTimer() {
@@ -154,83 +144,59 @@
 
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
-        const currentDate = new Date().getTime();
-        initialTime = currentDate;
-        localStorage.setItem('initialTime', initialTime);
-        clockInTimes.push(new Date(currentDate).toLocaleString());
-        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
-        saveTimesToLocalStorage();
+        const currentDate = new Date().getTime();
+        initialTime = parseInt(localStorage.getItem('initialTime')) || currentDate;
+        localStorage.setItem('initialTime', initialTime);
         startTimer();
       } else {
+        clockButton.textContent = 'Clock In';
         const currentDate = new Date().getTime();
+        const timeElapsed = currentDate - initialTime;
+        totalMilliseconds += timeElapsed;
+        initialTime = 0;
         clockOutTimes.push(new Date(currentDate).toLocaleString());
         addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
-        clockButton.textContent = 'Clock In';
-        saveTimesToLocalStorage();
         stopTimer();
+        saveTimesToLocalStorage();
+        localStorage.setItem('totalMilliseconds', totalMilliseconds);
+        localStorage.removeItem('initialTime');
       }
     });
 
     resetButton.addEventListener('click', function() {
       clockInTimes = [];
       clockOutTimes = [];
+      clockInTimesElement.innerHTML = '';
+      clockOutTimesElement.innerHTML = '';
       totalMilliseconds = 0;
       initialTime = 0;
-      updateClockTimes();
       updateTotalTime();
+      clockButton.textContent = 'Clock In';
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
       localStorage.removeItem('totalMilliseconds');
       localStorage.removeItem('initialTime');
-      clockButton.textContent = 'Clock In';
       stopTimer();
     });
 
     function updateHeading() {
-      const currentDate = new Date().toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-      headingElement.textContent = `Timesheet - ${currentDate}`;
+      const currentDate = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = currentDate.toLocaleDateString(undefined, options);
+      headingElement.textContent = formattedDate;
     }
 
     updateHeading();
     updateClockTimes();
     updateTotalTime();
 
-    // Check if clocked in and start timer
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
       const currentDate = new Date().getTime();
       initialTime = parseInt(localStorage.getItem('initialTime')) || currentDate;
-      totalMilliseconds = currentDate - initialTime;
       startTimer();
     }
-
-    // Additional code to handle iPhone specific issues
-    function isIPhone() {
-      return (
-        /iPhone|iPad|iPod/i.test(navigator.userAgent) && !window.MSStream
-      );
-    }
-
-    if (isIPhone()) {
-      document.body.classList.add('iphone');
-    }
-
-    // Restore timer state when the website is reopened or refreshed
-    window.addEventListener('load', function() {
-      if (clockInTimes.length > clockOutTimes.length) {
-        clockButton.textContent = 'Clock Out';
-        const currentDate = new Date().getTime();
-        initialTime = parseInt(localStorage.getItem('initialTime')) || currentDate;
-        totalMilliseconds = currentDate - initialTime;
-        startTimer();
-      }
-    });
   </script>
 </body>
 </html>
