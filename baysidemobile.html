@@ -83,6 +83,15 @@
       <button id="clockButton">Clock In</button>
       <button id="resetButton">Reset</button>
     </div>
+    <div>
+      <h2>Boats</h2>
+      <p>Boats collected: <span id="boatsCollected">0</span></p>
+      <p>Boats out: <span id="boatsOut">0</span></p>
+      <div class="button-container">
+        <button id="collectButton">Collect Boat</button>
+        <button id="putOutButton">Put Out Boat</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -92,12 +101,19 @@
     const totalTimeElement = document.getElementById('totalTime');
     const clockButton = document.getElementById('clockButton');
     const resetButton = document.getElementById('resetButton');
+    const collectButton = document.getElementById('collectButton');
+    const putOutButton = document.getElementById('putOutButton');
+    const boatsCollectedElement = document.getElementById('boatsCollected');
+    const boatsOutElement = document.getElementById('boatsOut');
 
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
     let totalMilliseconds = parseInt(localStorage.getItem('totalMilliseconds')) || 0;
     let lastClockInTimestamp = parseInt(localStorage.getItem('lastClockInTimestamp')) || 0;
     let timerInterval;
+
+    let boatsCollected = parseInt(localStorage.getItem('boatsCollected')) || 0;
+    let boatsOut = parseInt(localStorage.getItem('boatsOut')) || 0;
 
     function addListItem(element, text) {
       const li = document.createElement('li');
@@ -142,26 +158,11 @@
       localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
     }
 
-    function calculateTotalTime() {
-      totalMilliseconds = 0;
-      const len = Math.min(clockInTimes.length, clockOutTimes.length);
-
-      for (let i = 0; i < len; i++) {
-        const clockInTime = new Date(clockInTimes[i]).getTime();
-        const clockOutTime = new Date(clockOutTimes[i]).getTime();
-        const elapsedTime = clockOutTime - clockInTime;
-        totalMilliseconds += elapsedTime;
-      }
-
-      // Include elapsed time from last clock-in until current time
-      if (clockInTimes.length > clockOutTimes.length) {
-        const currentTime = new Date().getTime();
-        const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
-        const elapsedTime = currentTime - lastClockInTime;
-        totalMilliseconds += elapsedTime;
-      }
-
-      updateTotalTime();
+    function updateBoats() {
+      boatsCollectedElement.textContent = boatsCollected;
+      boatsOutElement.textContent = boatsOut;
+      localStorage.setItem('boatsCollected', boatsCollected);
+      localStorage.setItem('boatsOut', boatsOut);
     }
 
     clockButton.addEventListener('click', function() {
@@ -181,7 +182,6 @@
         saveTimesToLocalStorage();
         localStorage.removeItem('lastClockInTimestamp');
         stopTimer();
-        calculateTotalTime(); // Update total time after clocking out
       }
     });
 
@@ -200,6 +200,16 @@
       stopTimer();
     });
 
+    collectButton.addEventListener('click', function() {
+      boatsCollected++;
+      updateBoats();
+    });
+
+    putOutButton.addEventListener('click', function() {
+      boatsOut++;
+      updateBoats();
+    });
+
     function updateHeading() {
       const currentDate = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -209,7 +219,8 @@
 
     updateHeading();
     updateClockTimes();
-    calculateTotalTime(); // Calculate initial total time
+    updateTotalTime();
+    updateBoats();
 
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
