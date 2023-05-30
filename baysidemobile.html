@@ -143,45 +143,45 @@
     }
 
     function calculateTotalTime() {
-  totalMilliseconds = 0;
-  const len = Math.min(clockInTimes.length, clockOutTimes.length);
+      totalMilliseconds = 0;
+      const len = Math.min(clockInTimes.length, clockOutTimes.length);
 
-  for (let i = 0; i < len; i++) {
-    const clockInTime = new Date(clockInTimes[i]).getTime();
-    const clockOutTime = new Date(clockOutTimes[i]).getTime();
-    const elapsedTime = clockOutTime - clockInTime;
-    totalMilliseconds += elapsedTime;
-  }
+      for (let i = 0; i < len; i++) {
+        const clockInTime = new Date(clockInTimes[i]).getTime();
+        const clockOutTime = new Date(clockOutTimes[i]).getTime();
+        const elapsedTime = clockOutTime - clockInTime;
+        totalMilliseconds += elapsedTime;
+      }
 
-  // Include elapsed time from last clock-in until current time
-  if (clockInTimes.length > clockOutTimes.length) {
-    const currentTime = new Date().getTime();
-    const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
-    const elapsedTime = currentTime - lastClockInTime;
-    totalMilliseconds += elapsedTime;
-  }
+      // Include elapsed time from last clock-in until current time
+      if (clockInTimes.length > clockOutTimes.length) {
+        const currentTime = new Date().getTime();
+        const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
+        const elapsedTime = currentTime - lastClockInTime;
+        totalMilliseconds += elapsedTime;
+      }
 
-  updateTotalTime();
-}
+      updateTotalTime();
+    }
 
     clockButton.addEventListener('click', function() {
       if (clockButton.textContent === 'Clock In') {
-        const currentDate = new Date().toLocaleString();
-        clockInTimes.push(currentDate);
-        addListItem(clockInTimesElement, currentDate);
+        const currentDate = new Date().getTime();
+        clockInTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockInTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock Out';
         saveTimesToLocalStorage();
         localStorage.setItem('lastClockInTimestamp', currentDate);
         startTimer();
       } else {
-        const currentDate = new Date().toLocaleString();
-        clockOutTimes.push(currentDate);
-        addListItem(clockOutTimesElement, currentDate);
+        const currentDate = new Date().getTime();
+        clockOutTimes.push(new Date(currentDate).toLocaleString());
+        addListItem(clockOutTimesElement, new Date(currentDate).toLocaleString());
         clockButton.textContent = 'Clock In';
         saveTimesToLocalStorage();
         localStorage.removeItem('lastClockInTimestamp');
         stopTimer();
-        calculateTotalTime();
+        calculateTotalTime(); // Update total time after clocking out
       }
     });
 
@@ -209,7 +209,7 @@
 
     updateHeading();
     updateClockTimes();
-    updateTotalTime();
+    calculateTotalTime(); // Calculate initial total time
 
     if (clockInTimes.length > clockOutTimes.length) {
       clockButton.textContent = 'Clock Out';
