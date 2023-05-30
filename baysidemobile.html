@@ -65,6 +65,10 @@
       justify-content: space-between;
       margin-top: 20px;
     }
+
+    .boat-container {
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
@@ -83,13 +87,14 @@
       <button id="clockButton">Clock In</button>
       <button id="resetButton">Reset</button>
     </div>
-    <div>
+    <div class="boat-container">
       <h1>Boats</h1>
       <p>Boats out: <span id="boatsOut">0</span></p>
       <p>Boats collected: <span id="boatsCollected">0</span></p>
       <div class="button-container">
         <button id="putOutButton">Put Out Boat</button>
         <button id="collectButton">Collect Boat</button>
+        <button id="resetBoatsButton">Reset Boats</button>
       </div>
     </div>
   </div>
@@ -105,6 +110,7 @@
     const putOutButton = document.getElementById('putOutButton');
     const boatsCollectedElement = document.getElementById('boatsCollected');
     const boatsOutElement = document.getElementById('boatsOut');
+    const resetBoatsButton = document.getElementById('resetBoatsButton');
 
     let clockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
     let clockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
@@ -207,6 +213,12 @@
 
     putOutButton.addEventListener('click', function() {
       boatsOut++;
+      updateBoats();
+    });
+
+    resetBoatsButton.addEventListener('click', function() {
+      boatsCollected = 0;
+      boatsOut = 0;
       updateBoats();
     });
 
