@@ -86,7 +86,7 @@
   </div>
 
   <script>
-    const headingElement = document.getElementById('heading');
+        const headingElement = document.getElementById('heading');
     const clockInTimesElement = document.getElementById('clockInTimes');
     const clockOutTimesElement = document.getElementById('clockOutTimes');
     const totalTimeElement = document.getElementById('totalTime');
@@ -151,10 +151,10 @@
         localStorage.setItem('clockInTimes', JSON.stringify(clockInTimes));
 
         const storedInitialTime = parseInt(localStorage.getItem('initialTime'));
-        if (!storedInitialTime) {
-          initialTime = new Date().getTime();
-          localStorage.setItem('initialTime', initialTime);
-        }
+        const elapsedTime = new Date().getTime() - storedInitialTime;
+        totalMilliseconds += elapsedTime;
+        localStorage.setItem('totalMilliseconds', totalMilliseconds);
+
         startTimer();
       } else {
         clockButton.textContent = 'Clock In';
@@ -163,30 +163,19 @@
         addListItem(clockOutTimesElement, currentDate);
         localStorage.setItem('clockOutTimes', JSON.stringify(clockOutTimes));
 
-        const currentDateMillis = new Date().getTime();
-        const timeElapsed = currentDateMillis - initialTime;
-        totalMilliseconds += timeElapsed;
-        initialTime = 0;
         stopTimer();
-        saveTimesToLocalStorage();
-        localStorage.setItem('totalMilliseconds', totalMilliseconds);
-        localStorage.removeItem('initialTime');
       }
     });
 
     resetButton.addEventListener('click', function() {
       clockInTimes = [];
       clockOutTimes = [];
-      clockInTimesElement.innerHTML = '';
-      clockOutTimesElement.innerHTML = '';
       totalMilliseconds = 0;
-      initialTime = 0;
       updateTotalTime();
       clockButton.textContent = 'Clock In';
       localStorage.removeItem('clockInTimes');
       localStorage.removeItem('clockOutTimes');
       localStorage.removeItem('totalMilliseconds');
-      localStorage.removeItem('initialTime');
       stopTimer();
     });
 
@@ -197,21 +186,32 @@
       headingElement.textContent = formattedDate;
     }
 
-    updateHeading();
-    updateClockTimes();
-    updateTotalTime();
+    function checkClockStatus() {
+      const storedClockInTimes = JSON.parse(localStorage.getItem('clockInTimes')) || [];
+      const storedClockOutTimes = JSON.parse(localStorage.getItem('clockOutTimes')) || [];
 
-    if (clockInTimes.length > clockOutTimes.length) {
-      clockButton.textContent = 'Clock Out';
-      const storedInitialTime = parseInt(localStorage.getItem('initialTime'));
-      if (!storedInitialTime) {
-        initialTime = new Date().getTime();
-        localStorage.setItem('initialTime', initialTime);
-      } else {
+      if (storedClockInTimes.length > storedClockOutTimes.length) {
+        clockButton.textContent = 'Clock Out';
         startTimer();
       }
     }
+
+    function checkNewDay() {
+      const storedDate = localStorage.getItem('storedDate');
+      const currentDate = new Date().toLocaleDateString();
+
+      if (storedDate !== currentDate) {
+        localStorage.setItem('storedDate', currentDate);
+        resetButton.click();
+      }
+    }
+
+    updateHeading();
+    updateClockTimes();
+    updateTotalTime();
+    checkClockStatus();
+    checkNewDay();
   </script>
 </body>
 </html>
-/s
+
