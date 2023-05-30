@@ -136,7 +136,7 @@
       timerInterval = setInterval(function() {
         totalMilliseconds += 1000;
         updateTotalTime();
-        localStorage.setItem('totalMilliseconds', totalMilliseconds);
+        localStorage.setItem('totalMilliseconds', totalMilliseconds.toString());
       }, 1000);
     }
 
@@ -195,6 +195,18 @@
       headingElement.textContent = formattedDate;
     }
 
+    // Calculate the elapsed time when the page loads or is refreshed
+    function calculateElapsedTime() {
+      if (clockInTimes.length > clockOutTimes.length) {
+        const lastClockInTime = new Date(clockInTimes[clockInTimes.length - 1]).getTime();
+        const currentTime = new Date().getTime();
+        const elapsedMilliseconds = currentTime - lastClockInTime;
+        totalMilliseconds += elapsedMilliseconds;
+        updateTotalTime();
+        startTimer();
+      }
+    }
+
     // Call the updateHeading function initially
     updateHeading();
 
@@ -209,6 +221,9 @@
       clockButton.textContent = 'Clock Out';
       startTimer();
     }
+
+    // Calculate elapsed time when the page loads or is refreshed
+    calculateElapsedTime();
   </script>
 </body>
 </html>
