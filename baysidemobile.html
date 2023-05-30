@@ -66,6 +66,22 @@
       justify-content: space-between;
       margin-top: 20px;
     }
+
+    /* Add responsive styles here */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -185,35 +201,24 @@
       headingElement.textContent = formattedDate;
     }
 
-    function calculateElapsedTime() {
+    updateHeading();
+    updateClockTimes();
+    updateTotalTime();
+
+    if (clockInTimes.length > clockOutTimes.length) {
+      clockButton.textContent = 'Clock Out';
       const currentTime = new Date().getTime();
       const elapsedTime = currentTime - lastClockInTimestamp;
       totalMilliseconds += elapsedTime;
+      startTimer();
     }
 
-    function handlePageReload() {
+    window.addEventListener('beforeunload', function() {
       if (clockInTimes.length > clockOutTimes.length) {
-        clockButton.textContent = 'Clock Out';
-        calculateElapsedTime();
-        startTimer();
+        localStorage.setItem('lastClockInTimestamp', new Date().getTime());
+      } else {
+        localStorage.removeItem('lastClockInTimestamp');
       }
-    }
-
-    window.addEventListener('beforeunload', function(event) {
-      if (clockInTimes.length > clockOutTimes.length) {
-        const currentTime = new Date().getTime();
-        const elapsedTime = currentTime - lastClockInTimestamp;
-        totalMilliseconds += elapsedTime;
-        localStorage.setItem('lastClockInTimestamp', currentTime);
-        localStorage.setItem('totalMilliseconds', totalMilliseconds);
-      }
-    });
-
-    window.addEventListener('load', function() {
-      updateHeading();
-      updateClockTimes();
-      updateTotalTime();
-      handlePageReload();
     });
   </script>
 </body>
