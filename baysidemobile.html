@@ -47,7 +47,6 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
-      margin-bottom: 10px;
     }
 
     button:hover {
@@ -71,6 +70,12 @@
     .boat-container {
       margin-top: 40px;
     }
+
+    .boat-container .button-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -93,11 +98,13 @@
       <h1>Boats</h1>
       <p>Boats out: <span id="boatsOut">0</span></p>
       <p>Boats collected: <span id="boatsCollected">0</span></p>
-      <div class="button-container">
+      <div class="button-row">
         <button id="putOutButton">Put Out Boat</button>
         <button id="collectButton">Collect Boat</button>
       </div>
-      <button id="resetBoatsButton">Reset Boats</button>
+      <div class="button-row">
+        <button id="resetBoatsButton">Reset Boats</button>
+      </div>
     </div>
   </div>
 
