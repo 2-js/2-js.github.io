@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -69,7 +68,7 @@
       margin-top: 20px;
     }
 
-    .button-container button {
+    .button-container .reset-button {
       background-color: #f2f2f2;
       color: #000;
     }
@@ -83,35 +82,45 @@
       justify-content: space-between;
       margin-bottom: 10px;
     }
+
+    .reset-boats-button {
+      background-color: #f2f2f2;
+      color: #000;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1 id="heading"></h1>
-    <div>
-      <p>Clock-in times:</p>
+
+    <div class="clock-container">
+      <h2>Clock Times</h2>
       <ul id="clockInTimes"></ul>
-    </div>
-    <div>
-      <p>Clock-out times:</p>
       <ul id="clockOutTimes"></ul>
     </div>
-    <p>Total time worked: <span id="totalTime">00:00:00</span></p>
+
+    <div class="timer-container">
+      <h2>Time Tracked</h2>
+      <p>Total Time: <span id="totalTime"></span></p>
+    </div>
+
     <div class="button-container">
       <button id="clockButton">Clock In</button>
-      <button id="resetButton">Reset</button>
+      <button id="resetButton" class="reset-button">Reset</button>
     </div>
+
     <div class="boat-container">
-      <h1>Boats</h1>
-      <p>Boats out: <span id="boatsOut">0</span></p>
-      <p>Boats collected: <span id="boatsCollected">0</span></p>
+      <h2>Boats</h2>
       <div class="button-row">
-        <button id="putOutButton">Put Out Boat</button>
         <button id="collectButton">Collect Boat</button>
+        <button id="putOutButton">Put Out Boat</button>
       </div>
       <div class="button-row">
-        <button id="resetBoatsButton">Reset Boats</button>
+        <button id="resetBoatsButton" class="reset-boats-button">Reset Boats</button>
       </div>
+      <p>Boats Collected: <span id="boatsCollected"></span></p>
+      <p>Boats Out: <span id="boatsOut"></span></p>
     </div>
   </div>
 
@@ -267,4 +276,5 @@
     });
   </script>
 </body>
+
 </html>
