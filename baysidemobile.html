@@ -66,18 +66,8 @@
       margin-top: 20px;
     }
 
-    @media only screen and (max-width: 600px) {
-      .container {
-        padding: 10px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      button {
-        font-size: 14px;
-      }
+    .boat-container {
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -97,15 +87,15 @@
       <button id="clockButton">Clock In</button>
       <button id="resetButton">Reset</button>
     </div>
-    <div>
+    <div class="boat-container">
       <h1>Boats</h1>
-      <p>Boats collected: <span id="boatsCollected">0</span></p>
       <p>Boats out: <span id="boatsOut">0</span></p>
+      <p>Boats collected: <span id="boatsCollected">0</span></p>
       <div class="button-container">
-        <button id="collectButton">Collect Boat</button>
         <button id="putOutButton">Put Out Boat</button>
+        <button id="collectButton">Collect Boat</button>
+        <button id="resetBoatsButton">Reset Boats</button>
       </div>
-      <button id="resetBoatsButton">Reset Boats</button>
     </div>
   </div>
 
